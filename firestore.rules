@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /quiz/{id} {
+      allow read: if true;
+      // Só cria (nunca altera nem apaga): cada nome responde uma única vez por quiz.
+      allow create: if request.resource.data.keys().hasOnly(['qid','name','nk','cls','score','total','sec','ts'])
+        && request.resource.data.qid is string
+        && request.resource.data.name is string && request.resource.data.name.size() >= 2 && request.resource.data.name.size() <= 24
+        && request.resource.data.nk is string
+        && request.resource.data.cls is string && request.resource.data.cls.size() <= 20
+        && request.resource.data.score is int && request.resource.data.total is int
+        && request.resource.data.score >= 0 && request.resource.data.score <= request.resource.data.total
+        && request.resource.data.total <= 10
+        && request.resource.data.sec is int && request.resource.data.sec >= 0
+        && request.resource.data.ts is int
+        && id == request.resource.data.qid + '_' + request.resource.data.nk;
+      allow update, delete: if false;
+    }
+  }
+}
