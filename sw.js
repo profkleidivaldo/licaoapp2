@@ -3,7 +3,7 @@
    Os textos das versões (ACF/AA/NVI) e a lição são guardados pela página no Cache Storage
    (caches "ess-biblia-v1" e "ess-licoes-v1"), que este arquivo não toca. */
 
-const SHELL = "ess-shell-v6";
+const SHELL = "ess-shell-v7";
 const ASSETS = [
   "./",
   "./index.html",

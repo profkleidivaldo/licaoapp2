@@ -1,41 +1,46 @@
 # Escola Sabatina — Estudo da Lição (PWA)
 
-Lição do trimestre com leitura bíblica ao toque, grifos, áudio da CPB mais, quiz semanal com ranking e uso offline.
+Lição do trimestre com leitura bíblica ao toque, grifos, áudio, quiz semanal com ranking e uso offline.
 
 ## Publicar no GitHub Pages
-1. Envie **todos** os arquivos (inclusive `data/`, `tools/` e `.github/`) para um repositório.
+1. Envie **todos** os arquivos (inclusive `data/`, `tools/`, `apps-script/` e `.github/`) para um repositório.
 2. Settings → Pages → *Deploy from a branch* → `main` / `(root)`.
 3. Settings → Actions → General → *Workflow permissions* → **Read and write**.
 4. Abra `https://SEU-USUARIO.github.io/NOME-DO-REPO/` e use "Adicionar à tela inicial".
 
 ## Atualização automática
-- **No app:** a cada abertura com internet ele busca o trimestre vigente no repositório Adventech/sabbath-school-lessons. Ao mudar de trimestre, progresso e grifos do anterior são arquivados.
+- **No app:** a cada abertura com internet ele busca o trimestre vigente no repositório Adventech/sabbath-school-lessons.
 - **Capas e áudios (CPB mais):** o workflow `.github/workflows/atualizar.yml` roda todo dia e atualiza `data/capas.json` e `data/audios.json`. Rode-o uma vez em *Actions → Atualizar lição e capas → Run workflow*.
 
-## Áudio
-Cada dia mostra o player com o áudio da CPB mais (quando o workflow encontrar o arquivo) e um link para a página de áudio da lição. Os áudios tocam direto do site da CPB e **não** ficam salvos offline. Se a CPB mudar a estrutura do site e os arquivos não forem encontrados, o app mostra só o link "Ouvir no CPB mais".
+## Áudio dentro do app
+- Se o workflow encontrar os arquivos de áudio na página da CPB, cada dia mostra um player e toca ali mesmo.
+- Se não encontrar (por exemplo, se a CPB exigir login), o botão "▶ Ouvir aqui no app" abre a página de áudio da CPB numa janela *dentro* do app. Se a CPB bloquear esse uso, a janela traz um link para abrir no site.
 
 ## Quiz e ranking semanal
-Depois de Sexta há a aba **Quiz** (🏆) com até 10 perguntas geradas do texto da semana: verso para memorizar, referência bíblica de um texto, completar versículos, tema de cada dia e leituras da semana. As perguntas são iguais para todos. Cada pessoa responde **uma vez** e vê o resultado, a revisão e o ranking (empate decidido pelo menor tempo). Há um campo opcional de "código da classe" para filtrar o ranking.
+Depois de Sexta há a aba **Quiz** 🏆: **uma pergunta por dia de estudo**, gerada do texto daquele dia (no sábado, o verso para memorizar). As perguntas são iguais para todos e só se responde uma vez.
 
-Para quizzes escritos à mão, preencha `data/quiz.json` (ele tem prioridade sobre o automático):
+- **Pontuação para todos:** o ranking (pódio, barras, "Esta semana" e "Trimestre", filtro por classe) aparece para qualquer pessoa que use o app.
+- **Respostas só para quem respondeu:** a revisão das respostas e os acertos (●) de cada colega só aparecem depois de responder o quiz.
+
+Para escrever perguntas à mão, use `data/quiz.json` (tem prioridade sobre as automáticas):
 ```json
-{"2026-04-04":[{"q":"Pergunta?","o":["A","B","C","D"],"a":1,"e":"Explicação mostrada após responder"}]}
+{"2026-04-04":[{"h":"Domingo · Título","q":"Pergunta?","o":["A","B","C","D"],"a":1,"e":"Explicação"}]}
 ```
 
-### Ligar o ranking (Firebase, gratuito)
-O GitHub Pages não guarda dados, então o ranking usa o Firestore. Sem isso o quiz funciona, mas só mostra o resultado no aparelho.
-1. Em console.firebase.google.com, crie um projeto (pode desativar o Analytics).
-2. *Build → Firestore Database → Criar banco de dados* (modo produção, região `southamerica-east1`).
-3. Aba **Regras**: cole o conteúdo de `firestore.rules` e publique.
-4. ⚙ *Configurações do projeto → Seus apps → Web (`</>`)*: registre o app e copie `apiKey` e `projectId`.
-5. Cole os dois valores em `config.js` e envie ao GitHub.
+### Ligar o ranking com o Google Apps Script (gratuito)
+1. Crie uma planilha em sheets.google.com (pode ficar vazia).
+2. **Extensões → Apps Script**, apague o conteúdo, cole o arquivo `apps-script/Code.gs` e salve.
+3. **Implantar → Nova implantação → App da Web**. Executar como: **Eu**. Quem pode acessar: **Qualquer pessoa**. Implante e autorize o acesso.
+4. Copie a URL que termina em `/exec` e cole em `config.js`, no campo `apiUrl`. Envie ao GitHub.
+5. Ao editar o código depois: *Implantar → Gerenciar implantações → editar → Nova versão*.
+
+Os dados ficam na aba `respostas` da sua planilha, onde você pode ver e apagar linhas.
 
 ### Limites do ranking
-A nota é calculada no aparelho e a regra do servidor garante um envio por nome em cada quiz. Quem limpar os dados do navegador e usar outro nome pode responder de novo, e alguém com conhecimento técnico pode enviar notas falsas. Serve para grupos de confiança, como uma classe da Escola Sabatina.
+A nota é calculada no aparelho e o servidor aceita um envio por nome em cada quiz. Quem usar outro nome pode responder de novo, e alguém com conhecimento técnico pode enviar notas falsas. Serve para grupos de confiança, como uma classe da Escola Sabatina.
 
 ## Uso offline
-Toque em Aa → ⤓ Offline: baixe a lição e as versões da Bíblia (ACF, AA, NVI). Capas e versículos já vistos também ficam guardados.
+Aa → ⤓ Offline: baixe a lição e as versões da Bíblia (ACF, AA, NVI). Os áudios exigem internet.
 
 ## Aviso
 O texto da lição, as capas e os áudios pertencem à Associação Geral e à CPB. Verifique as condições de uso antes de divulgar publicamente.

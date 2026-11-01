@@ -1,3 +1,3 @@
-// Ranking do quiz (Firebase Firestore). Preencha após criar o projeto — veja o README.
-// Esses dados são públicos por natureza; quem protege o banco são as regras (firestore.rules).
-window.ESS_CONFIG = { firebase: { apiKey: "", projectId: "" } };
+// Ranking do quiz: cole aqui a URL do App da Web do Google Apps Script (termina em /exec).
+// Veja apps-script/Code.gs e o README. Deixe vazio para usar o quiz só no aparelho.
+window.ESS_CONFIG = { apiUrl: "" };

@@ -159,6 +159,30 @@ body.home #hm{display:none}
 .rk td{padding:7px 4px;border-bottom:1px solid var(--line)}
 .rk tr.me{background:var(--accs);font-weight:600}
 .rv summary{cursor:pointer;color:var(--acc);font-weight:600;margin:14px 0 4px}
+
+.bt2{width:100%;padding:11px;background:var(--accs);color:var(--acc);border-color:var(--acc);font-weight:600}
+.pod{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:10px 0 16px}
+.pod>div{flex:1;max-width:116px;text-align:center}
+.pod .av{margin:0 auto 4px;width:44px;height:44px}
+.pod .nm{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.ped{border-radius:12px 12px 0 0;background:var(--accs);border:1px solid var(--line);border-bottom:0;display:flex;flex-direction:column;align-items:center;padding:6px 2px;gap:2px}
+.ped b{font:600 24px Lora,Georgia,serif;color:var(--acc)}
+.p1 .ped{height:104px;background:#ffe9a8;color:#5a4300}.p1 .ped b{color:#7a5a00}
+.p2 .ped{height:80px}.p3 .ped{height:64px}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font:600 15px Inter,sans-serif;flex:none}
+.rw{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:14px;margin-bottom:7px;background:var(--surf);border:1px solid var(--line)}
+.rw.me{border:2px solid var(--acc);background:var(--accs)}
+.rw .n{width:20px;text-align:center;color:var(--mute);font-weight:600;font-size:13px}
+.in2{flex:1;min-width:0}
+.rw .nm{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar2{height:6px;border-radius:9px;background:var(--line);margin-top:5px;overflow:hidden}
+.bar2 i{display:block;height:100%;background:var(--acc);border-radius:9px}
+.rw .sc{text-align:right;font-weight:600;font-size:15px;flex:none}
+.rw .sc small{display:block;color:var(--mute);font-weight:400;font-size:11px}
+.dots{display:flex;gap:3px;justify-content:center;margin-top:4px;flex-wrap:wrap}
+.rw .dots{justify-content:flex-start}
+.dots i{width:8px;height:8px;border-radius:50%;background:#c0392b}
+.dots i.y{background:var(--ok)}
 </style>
 </head>
 <body>
@@ -444,11 +468,15 @@ addEventListener('scroll',()=>{const y=scrollY,h=$('hd');
 function audioBox(wi,di){
   const a=(AUD[D.id]||{})[D.weeks[wi].n];if(!a||(!a.page&&!(a.files&&a.files.length)))return'';
   const fl=a.files||[],f=fl[di]||(fl.length==1?fl[0]:'');
-  return`<div class="au"><small>🎧 Áudio da lição · CPB mais</small>${f?`<audio controls preload="none" src="${esc(f)}"></audio>`:''}${a.page?`<a href="${esc(a.page)}" target="_blank" rel="noopener">${f?'abrir':'Ouvir'} no CPB mais ↗</a>`:''}</div>`;
+  return`<div class="au"><small>🎧 Áudio da lição · CPB mais</small>${f?`<audio controls preload="none" src="${esc(f)}"></audio>`:`<button class="bt2" data-au="${esc(a.page)}">▶ Ouvir aqui no app</button>`}</div>`;
 }
-/* ===== quiz (gerado do texto da lição; mesmas perguntas para todos) ===== */
-const SW=new Set('que como para por com uma uns umas das dos nos nas mas não sua seu suas seus isso essa esse este esta estes estas ele ela eles elas quando onde pois também ainda então porque sobre entre até sem mais muito todos todas cada outro outra outros outras são foi ser tem tinha pelo pela pelos pelas aos nós vocês você deus senhor jesus cristo'.split(' '));
-const DN=['','domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira'];
+function openAudio(url){
+  bib=null;$('sheet').hidden=false;$('st').textContent='Áudio da lição';$('sv').innerHTML='';$('sf').innerHTML='';
+  $('sbody').innerHTML=`<iframe src="${esc(url)}" allow="autoplay" style="width:100%;height:min(62vh,560px);border:0;border-radius:12px;background:#fff"></iframe><p class="mute">Toque no dia desejado e depois no play. Se o player não aparecer, <a href="${esc(url)}" target="_blank" rel="noopener" style="color:var(--acc)">abra no site da CPB</a>.</p>`;
+}
+/* ===== quiz: uma pergunta por dia de estudo, tirada do texto daquele dia ===== */
+const SW=new Set('que como para por com uma uns umas das dos nos nas mas não sua seu suas seus isso essa esse este esta estes estas ele ela eles elas quando onde pois também ainda então porque sobre entre até sem mais muito todos todas cada outro outra outros outras são foi ser tem tinha pelo pela pelos pelas aos nós vocês você deus senhor jesus cristo testamento bíblia através assim sempre apenas mesmo mesma outras pode podem deve devem fazer feito tudo nada alguém algo quanto quando durante depois antes dentro fora ainda'.split(' '));
+const DN=['sábado','domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira'];
 const qid=wi=>D.id+'-'+String(D.weeks[wi].n).padStart(2,'0');
 function rng(s){let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}let a=h>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 const qcache={};
@@ -456,69 +484,69 @@ const quizFor=wi=>{const id=qid(wi);return QZ[id]||(qcache[id]=qcache[id]||genQu
 function genQuiz(wi,id){
   const w=D.weeks[wi],r=rng(id),pick=a=>a[Math.floor(r()*a.length)];
   const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-  const cl=t=>t.replace(/\*\*?|_/g,'').replace(/\s+/g,' ').trim(),all=w.days.map(d=>d.md).join('\n\n'),all2=cl(all);
+  const cl=t=>t.replace(/\*\*?|_/g,'').replace(/\s+/g,' ').trim(),lw=t=>cl(t).match(/[A-Za-zÀ-ú]{6,}/g)||[];
   const nr=x=>{const m=x.match(/^((?:\d ?)?[A-Za-zÀ-ú]+)\.? ?(\d.*)$/);return m&&ALIAS[m[1]]!==undefined?BK[ALIAS[m[1]]][0]+' '+m[2]:x};
-  const Q=[],seen=new Set();
-  for(const m of all.matchAll(/[“"]([^”"\n]{40,320})[”"]\s*\(([^()\n]*?\d+:\d+[^()\n]*)\)/g)){
-    const t=cl(m[1]),ref=nr(m[2].split(';')[0].trim());
-    if(!/^(?:\d ?)?[A-ZÀ-Ú][A-Za-zà-ú]+\.? ?\d+:\d+/.test(ref)||seen.has(t))continue;seen.add(t);Q.push({t,ref});
-  }
-  const d0=cl(w.days[0].md),mem=Q.find(x=>d0.includes(x.t)),rest=sh(Q.filter(x=>x!==mem));
-  const words=[...new Set((all2.match(/[A-Za-zÀ-ú]{5,}/g)||[]).map(x=>x.toLowerCase()))].filter(x=>!SW.has(x));
-  const refs=[...new Set([...all.matchAll(REF)].map(m=>nr(m[0])))];
-  function cloze(text){
-    const ws=text.split(' '),c=ws.map((x,i)=>[x.replace(/[^A-Za-zÀ-ú]/g,''),i]).filter(([x,i])=>i>0&&x.length>=6&&!SW.has(x.toLowerCase()));
-    if(!c.length)return null;const[w0,i]=pick(c),lc=w0.toLowerCase();
-    const ds=sh(words.filter(x=>x!=lc&&Math.abs(x.length-w0.length)<=2));if(ds.length<3)return null;
-    const cap=w0[0]!=lc[0],f=x=>cap?x[0].toUpperCase()+x.slice(1):x,o=sh([w0,...ds.slice(0,3).map(f)]);
+  const weekWords=[...new Set(lw(w.days.map(d=>d.md).join(' ')).map(x=>x.toLowerCase()))].filter(x=>!SW.has(x));
+  const refs=[...new Set([...w.days.map(d=>d.md).join('\n').matchAll(REF)].map(m=>nr(m[0])))];
+  function build(sent,key,pool){
+    const ws=sent.split(' '),i=ws.findIndex(x=>x.replace(/[^A-Za-zÀ-ú]/g,'').toLowerCase()==key);if(i<0)return null;
+    const w0=ws[i].replace(/[^A-Za-zÀ-ú]/g,''),cap=w0[0]!=w0[0].toLowerCase(),inS=new Set(sent.toLowerCase().match(/[a-zà-ú]+/g));
+    const ok=x=>x!=key&&x.slice(0,5)!=key.slice(0,5)&&!inS.has(x)&&Math.abs(x.length-key.length)<=4;
+    const sc=x=>x.slice(-2)==key.slice(-2)?2:x.slice(-1)==key.slice(-1)?1:0,top=a=>sh(a).sort((x,y)=>sc(y)-sc(x));
+    let ds=top(pool.filter(ok)).slice(0,3);if(ds.length<3)ds=[...ds,...top(weekWords.filter(x=>ok(x)&&!ds.includes(x))).slice(0,3-ds.length)];
+    if(ds.length<3)return null;
+    const f=x=>cap?x[0].toUpperCase()+x.slice(1):x,o=sh([w0,...ds.map(f)]);
     return{blank:ws.map((x,j)=>j==i?x.replace(w0,'_____'):x).join(' '),o,a:o.indexOf(w0)};
   }
-  const clz=(x,pre)=>{const c=cloze(x.t);return c&&{q:`${pre} (${x.ref}):\n“${c.blank}”`,o:c.o,a:c.a,e:`${x.ref}: “${x.t}”`}};
-  const refq=x=>{const ds=sh(refs.filter(y=>y!=x.ref&&!x.ref.startsWith(y)&&!y.startsWith(x.ref)));if(ds.length<3)return null;const o=sh([x.ref,...ds.slice(0,3)]);return{q:`Qual é a referência bíblica deste texto?\n“${x.t.length>200?x.t.slice(0,200)+'…':x.t}”`,o,a:o.indexOf(x.ref),e:`Texto de ${x.ref}.`}};
-  const memQ=mem&&clz(mem,'Complete o verso para memorizar');
-  const refQs=rest.slice(0,3).map(refq).filter(Boolean),clzQs=rest.slice(3,5).map(x=>clz(x,'Complete o texto')).filter(Boolean);
-  const T=w.days.slice(1).map((d,i)=>({n:DN[i+1],t:d.t})).filter(x=>x.t);
-  const Dq=sh(T).slice(0,4).map(x=>{const ds=sh(T.filter(y=>y.t!=x.t)).slice(0,3);if(ds.length<3)return null;const o=sh([x.t,...ds.map(y=>y.t)]);return{q:`Qual é o tema do estudo de ${x.n}?`,o,a:o.indexOf(x.t),e:`${x.n}: ${x.t}.`}}).filter(Boolean);
-  const mine=(w.reads||'').split(/;\s*/).filter(Boolean),others=[...new Set(D.weeks.filter(x=>x!==w).flatMap(x=>(x.reads||'').split(/;\s*/)).filter(x=>x&&!mine.includes(x)))];
-  let rq=null;if(mine.length&&others.length>=3){const c=pick(mine),o=sh([c,...sh(others).slice(0,3)]);rq={q:'Qual destas passagens faz parte das leituras da semana?',o,a:o.indexOf(c),e:'Leituras da semana: '+mine.join('; ')+'.'}}
-  const sents=all.split(/\n\s*\n/).filter(p=>!/^[>`#]/.test(p.trim())).flatMap(p=>cl(p).split(/(?<=[.!?])\s+(?=[A-ZÀ-Ú“])/)).filter(x=>{const n=x.split(' ').length;return n>=12&&n<=30&&!/[“”()\d]/.test(x)});
-  const Sq=sh(sents).slice(0,3).map(x=>{const c=cloze(x);return c&&{q:'Complete a frase da lição:\n“'+c.blank+'”',o:c.o,a:c.a,e:x}}).filter(Boolean);
-  const L=[...refQs,...clzQs,...(rq?[rq]:[]),...Dq.slice(0,2),...Sq.slice(0,1)];
-  for(const x of[...Dq.slice(2),...Sq.slice(1)]){if((memQ?1:0)+L.length>=10)break;L.push(x)}
-  const out=[...(memQ?[memQ]:[]),...sh(L)].slice(0,10);return out.length>=3?out:[];
+  function dayQ(d,di){
+    const h=DAYS[di]+' · '+cl(d.t);
+    const prose=d.md.split(/\n\s*\n/).filter(p=>!/^[>`#]/.test(p.trim())).map(cl).join(' ');
+    const fr={};lw(prose).forEach(x=>{x=x.toLowerCase();if(!SW.has(x))fr[x]=(fr[x]||0)+1});
+    const pool=Object.keys(fr).sort((a,b)=>fr[b]-fr[a]).slice(0,40);
+    if(di==0){ // sábado: verso para memorizar
+      const m=d.md.match(/>\s*[“"]([^”"]{30,400})[”"]\s*\(([^()]+)\)/);
+      if(m){const t=cl(m[1]),ref=nr(m[2].trim()),ks=lw(t).map(x=>x.toLowerCase()).filter(x=>!SW.has(x));
+        if(ks.length){const b=build(t,pick(ks),weekWords);if(b)return{h,q:`Complete o verso para memorizar (${ref}):\n“${b.blank}”`,o:b.o,a:b.a,e:`${ref}: “${t}”`}}}
+    }
+    const keys=pool.filter(x=>fr[x]>=2).slice(0,12);
+    const sents=prose.split(/(?<=[.!?])\s+(?=[A-ZÀ-Ú])/).filter(x=>{const n=x.split(' ').length;return n>=12&&n<=32&&!/[“”"()\d:]/.test(x)&&/[.!?]$/.test(x)&&!/^(Ele|Ela|Eles|Elas|Isso|Esse|Essa|Este|Esta|Mas|E|Porém|Assim|Então|Portanto|Além|Também|Ou)\b/.test(x)});
+    let best=null;
+    for(const x of sh(sents)){const low=x.toLowerCase(),hit=keys.filter(k=>new RegExp('(?<![a-zà-ú])'+k+'(?![a-zà-ú])').test(low));if(hit.length&&(!best||hit.length>best.hit.length))best={x,hit}}
+    if(best){const key=pick(best.hit),b=build(best.x,key,pool);
+      if(b)return{h,q:'Complete a frase do estudo:\n“'+b.blank+'”',o:b.o,a:b.a,e:`Revise o estudo de ${DN[di]} (“${cl(d.t)}”): “${best.x}”`}}
+    const qs=[...d.md.matchAll(/[“"]([^”"\n]{40,320})[”"]\s*\(([^()\n]*?\d+:\d+[^()\n]*)\)/g)].map(m=>({t:cl(m[1]),ref:nr(m[2].split(';')[0].trim())})).filter(x=>/^(?:\d ?)?[A-ZÀ-Ú][A-Za-zà-ú]+\.? ?\d+:\d+/.test(x.ref));
+    if(qs.length){const x=pick(qs),ds=sh(refs.filter(y=>y!=x.ref&&!x.ref.startsWith(y)&&!y.startsWith(x.ref)));
+      if(ds.length>=3){const o=sh([x.ref,...ds.slice(0,3)]);return{h,q:`Qual é a referência bíblica deste texto do estudo?\n“${x.t.length>200?x.t.slice(0,200)+'…':x.t}”`,o,a:o.indexOf(x.ref),e:`Texto de ${x.ref}.`}}}
+    return null;
+  }
+  const out=w.days.map(dayQ).filter(Boolean);return out.length>=3?out:[];
 }
-const FB=(window.ESS_CONFIG||{}).firebase||{},FBON=!!(FB.apiKey&&FB.projectId);
-const FSB=()=>`https://firestore.googleapis.com/v1/projects/${FB.projectId}/databases/(default)/documents`;
+const API=(window.ESS_CONFIG||{}).apiUrl||'',API_ON=!!API;
+const api=p=>fetch(API+(API.includes('?')?'&':'?')+new URLSearchParams(p)).then(r=>{if(!r.ok)throw 0;return r.json()});
 const nkey=n=>n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const fmt=t=>Math.floor(t/60)+':'+String(t%60).padStart(2,'0');
 async function sendScore(id,r){
-  const iv=v=>({integerValue:String(v)}),sv=v=>({stringValue:v});
-  const body={fields:{qid:sv(id),name:sv(r.name),nk:sv(nkey(r.name)),cls:sv(r.cls||''),score:iv(r.score),total:iv(r.total),sec:iv(r.sec),ts:iv(r.ts)}};
-  const res=await fetch(`${FSB()}/quiz?documentId=${encodeURIComponent(id+'_'+nkey(r.name))}&key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-  if(res.ok)return'ok';if(res.status==409||res.status==403)return'dup';throw 0;
+  const x=await api({action:'submit',qid:id,name:r.name,cls:r.cls||'',score:r.score,total:r.total,sec:r.sec,pat:r.qs.map((q,i)=>r.ans[i]==q.a?1:0).join('')});
+  if(x.ok)return'ok';if(x.dup)return'dup';throw 0;
 }
-async function getRank(id){
-  const res=await fetch(`${FSB()}:runQuery?key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({structuredQuery:{from:[{collectionId:'quiz'}],where:{fieldFilter:{field:{fieldPath:'qid'},op:'EQUAL',value:{stringValue:id}}},limit:500}})});
-  if(!res.ok)throw 0;
-  return(await res.json()).filter(x=>x.document).map(x=>{const f=x.document.fields;return{name:f.name.stringValue,cls:(f.cls||{}).stringValue||'',score:+f.score.integerValue,total:+f.total.integerValue,sec:+f.sec.integerValue,ts:+f.ts.integerValue}}).sort((a,b)=>b.score-a.score||a.sec-b.sec||a.ts-b.ts);
-}
-let RKF='all',RKD=null;
+let RKF='all',RKS='week',RKD=null;
 function renderQuiz(){
   const wi=W,id=qid(wi),w=D.weeks[wi],p=S.qp[id],rec=S.qz[id],qs=(p&&p.qs)||(rec&&rec.qs)||quizFor(wi);
   if(p&&!rec&&qs.length&&p.ans.length>=qs.length)return finish(id);
-  let h=`<div class="meta"><span class="chip">🏆 Quiz · Lição ${w.n}</span>${qs.length?`<span class="chip">${qs.length} perguntas</span>`:''}</div><h2>Quiz da semana</h2>`;
+  let h=`<div class="meta"><span class="chip">🏆 Quiz · Lição ${w.n}</span>${qs.length?`<span class="chip">${qs.length} perguntas · uma por dia</span>`:''}</div><h2>Quiz da semana</h2>`,rk=true;
   if(!qs.length)h+='<p class="intro">Esta semana ainda não tem conteúdo suficiente para gerar o quiz.</p>';
-  else if(rec)h+=resultHTML(qs,rec);
-  else if(p){const i=p.ans.length,q=qs[i];
-    h+=`<div class="pg"><i style="width:${i/qs.length*100}%"></i></div><p class="mute">Pergunta ${i+1} de ${qs.length}</p><div class="q" id="qq"><div class="t" style="white-space:pre-line">${esc(q.q)}</div>${q.o.map((o,k)=>`<button class="op" data-qo="${k}">${esc(o)}</button>`).join('')}<div id="qf"></div></div>`}
-  else h+=`<div class="q"><div class="t">Responda ${qs.length} perguntas sobre a lição desta semana. <b>Só é possível responder uma vez</b>; a pontuação entra no ranking semanal.</div><input class="in" id="qn" maxlength="24" placeholder="Seu nome (aparece no ranking)" value="${esc(S.name)}"><input class="in" id="qc" maxlength="20" placeholder="Código da classe (opcional)" value="${esc(S.cls)}"><button class="bt" id="qgo">Começar o quiz</button></div>`;
+  else if(rec)h+=scoreHTML(rec);
+  else if(p){rk=false;const i=p.ans.length,q=qs[i];
+    h+=`<div class="pg"><i style="width:${i/qs.length*100}%"></i></div><p class="mute">Pergunta ${i+1} de ${qs.length}</p><div class="q" id="qq">${q.h?`<small>${esc(q.h)}</small>`:''}<div class="t" style="white-space:pre-line">${esc(q.q)}</div>${q.o.map((o,k)=>`<button class="op" data-qo="${k}">${esc(o)}</button>`).join('')}<div id="qf"></div></div>`}
+  else h+=`<div class="q"><div class="t">Responda ${qs.length} perguntas, uma sobre o texto de cada dia de estudo. <b>Só é possível responder uma vez</b>. As respostas só aparecem para quem responde; a pontuação, para todos.</div><input class="in" id="qn" maxlength="24" placeholder="Seu nome (aparece no ranking)" value="${esc(S.name)}"><input class="in" id="qc" maxlength="20" placeholder="Código da classe (opcional)" value="${esc(S.cls)}"><button class="bt" id="qgo">Começar o quiz</button></div>`;
+  if(rk&&qs.length)h+='<h3 class="hh" style="margin-top:22px">Ranking</h3><div id="rk"><p class="mute">Carregando…</p></div>';
+  if(rec)h+=`<details class="rv"><summary>Rever minhas respostas</summary>${qs.map((q,i)=>`<div class="q">${q.h?`<small>${esc(q.h)}</small>`:''}<div class="t" style="white-space:pre-line">${esc(q.q)}</div><p class="ex">${rec.ans[i]==q.a?'✓':'✗'} Você: ${esc(q.o[rec.ans[i]]||'—')}${rec.ans[i]==q.a?'':'<br>Certa: '+esc(q.o[q.a])}<br>${esc(q.e||'')}</p></div>`).join('')}</details>`;
   $('app').innerHTML=h+`<div class="nav"><button id="pv">← Anterior</button><button id="nx" ${W==D.weeks.length-1?'disabled':''}>Próxima lição →</button></div>`;
-  if(rec)loadRank(id,rec);
+  if(rk&&qs.length)loadRank(id);
 }
-function resultHTML(qs,r){
-  const st=!FBON?'<p class="mute">Ranking desativado: falta configurar o Firebase (veja o README). Seu resultado ficou salvo no aparelho.</p>':r.sent?'<p class="mute">✓ Pontuação enviada ao ranking.</p>':r.dup?`<div class="q"><div class="t">O nome “${esc(r.name)}” já respondeu este quiz em outro aparelho. Envie com outro nome:</div><input class="in" id="qrn" maxlength="24" placeholder="Outro nome"><button class="bt" id="qrg">Enviar ao ranking</button></div>`:'<p class="mute">Enviando ao ranking… (sem internet, o envio é feito quando a conexão voltar)</p>';
-  return`<div class="q" style="text-align:center"><div class="score">${r.score}/${r.total}</div><div class="mute">Tempo ${fmt(r.sec)} · ${esc(r.name)}${r.cls?' · classe '+esc(r.cls):''}</div></div>${st}<h3 class="hh">Ranking da semana</h3><div id="rk"><p class="mute">Carregando…</p></div>
-  <details class="rv"><summary>Rever respostas</summary>${qs.map((q,i)=>`<div class="q"><div class="t" style="white-space:pre-line">${i+1}. ${esc(q.q)}</div><p class="ex">${r.ans[i]==q.a?'✓':'✗'} Você: ${esc(q.o[r.ans[i]]||'—')}${r.ans[i]==q.a?'':'<br>Certa: '+esc(q.o[q.a])}<br>${esc(q.e||'')}</p></div>`).join('')}</details>`;
+function scoreHTML(r){
+  const st=!API_ON?'<p class="mute">Ranking desativado: falta colar a URL do Google Apps Script em config.js (veja o README). Seu resultado ficou salvo no aparelho.</p>':r.sent?'<p class="mute">✓ Pontuação enviada ao ranking.</p>':r.dup?`<div class="q"><div class="t">O nome “${esc(r.name)}” já respondeu este quiz em outro aparelho. Envie com outro nome:</div><input class="in" id="qrn" maxlength="24" placeholder="Outro nome"><button class="bt" id="qrg">Enviar ao ranking</button></div>`:'<p class="mute">Enviando ao ranking… (sem internet, o envio é feito quando a conexão voltar)</p>';
+  return`<div class="q" style="text-align:center"><div class="score">${r.score}/${r.total}</div><div class="mute">${esc(r.name)}${r.cls?' · classe '+esc(r.cls):''} · tempo ${fmt(r.sec)}</div></div>${st}`;
 }
 function answer(k){
   const id=qid(W),p=S.qp[id],qq=$('qq');if(!p||!qq||qq.dataset.l)return;
@@ -532,30 +560,39 @@ function finish(id){
   delete S.qp[id];save();draw();trySend(id);
 }
 async function trySend(id){
-  const r=S.qz[id];if(!FBON||!r||r.sent||r.dup||!navigator.onLine)return;
+  const r=S.qz[id];if(!API_ON||!r||r.sent||r.dup||!navigator.onLine)return;
   try{const x=await sendScore(id,r);if(x=='ok')r.sent=1;else r.dup=1;save();RKD=null}catch(e){return}
   if(VIEW=='day'&&Dy==7&&qid(W)==id&&!(document.activeElement&&document.activeElement.tagName=='INPUT'))renderQuiz();
 }
 const retrySends=()=>Object.keys(S.qz).forEach(trySend);
-async function loadRank(id,rec){
+async function loadRank(id){
   const el=$('rk');if(!el)return;
-  if(!FBON){el.innerHTML='<p class="mute">Ranking indisponível sem o Firebase configurado.</p>';return}
-  try{if(!RKD||RKD.id!=id||Date.now()-RKD.t>3e4)RKD={id,t:Date.now(),rows:await getRank(id)};drawRank(rec)}
+  if(!API_ON){el.innerHTML='<p class="mute">Ranking indisponível: falta configurar o Google Apps Script (veja o README).</p>';return}
+  const k=id+RKS+nkey(S.name||'');
+  try{if(!RKD||RKD.k!=k||Date.now()-RKD.t>2e4){const x=await api({action:'rank',qid:id,scope:RKS,me:nkey(S.name||'')});RKD={k,t:Date.now(),rows:x.rows||[],answered:!!x.answered}}drawRank()}
   catch(e){el.innerHTML='<p class="mute">Não foi possível carregar o ranking agora (sem internet?).</p><button data-rk="retry">Tentar de novo</button>'}
 }
-function drawRank(rec){
-  const el=$('rk');if(!el||!RKD)return;let rows=RKD.rows;const me=nkey(rec.name);
-  if(RKF=='cls'&&rec.cls)rows=rows.filter(x=>x.cls.toLowerCase()==rec.cls.toLowerCase());
-  el.innerHTML=`<div class="rt"><button data-rk="all" class="${RKF=='all'?'on':''}">Todos</button>${rec.cls?`<button data-rk="cls" class="${RKF=='cls'?'on':''}">Classe ${esc(rec.cls)}</button>`:''}</div>`+(rows.length?`<table class="rk">${rows.slice(0,30).map((x,i)=>`<tr class="${nkey(x.name)==me?'me':''}"><td>${['🥇','🥈','🥉'][i]||i+1}</td><td>${esc(x.name)}${x.cls?` <small>${esc(x.cls)}</small>`:''}</td><td>${x.score}/${x.total}</td><td>${fmt(x.sec)}</td></tr>`).join('')}</table><p class="mute">${rows.length} participante${rows.length>1?'s':''} · empate decidido pelo menor tempo</p>`:'<p class="mute">Ninguém no ranking ainda.</p>');
+function drawRank(){
+  const el=$('rk');if(!el||!RKD)return;const me=nkey(S.name||''),q=RKS=='quarter';
+  let rows=RKD.rows.slice().sort((a,b)=>b.score-a.score||a.sec-b.sec||a.ts-b.ts);
+  if(RKF=='cls'&&S.cls)rows=rows.filter(x=>x.cls.toLowerCase()==S.cls.toLowerCase());
+  const av=n=>`<div class="av" style="background:hsl(${Math.abs([...n].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7))%360} 42% 40%)">${esc((n.trim()[0]||'?').toUpperCase())}</div>`;
+  const dots=x=>x.pat?`<div class="dots">${[...x.pat].map(c=>`<i class="${c=='1'?'y':''}"></i>`).join('')}</div>`:'';
+  const pod=rows.length>=2,first=pod?3:0,mi=rows.findIndex(x=>nkey(x.name)==me);
+  const tabs=`<div class="rt"><button data-rs="week" class="${q?'':'on'}">Esta semana</button><button data-rs="quarter" class="${q?'on':''}">Trimestre</button></div>`+(S.cls?`<div class="rt"><button data-rk="all" class="${RKF=='all'?'on':''}">Todos</button><button data-rk="cls" class="${RKF=='cls'?'on':''}">Minha classe (${esc(S.cls)})</button></div>`:'');
+  const podium=pod?`<div class="pod">${[1,0,2].filter(i=>rows[i]).map(i=>{const x=rows[i];return`<div class="p${i+1}">${av(x.name)}<div class="nm">${esc(x.name)}</div><div class="ped"><span>${['🥇','🥈','🥉'][i]}</span><b>${x.score}</b>${dots(x)}</div></div>`}).join('')}</div>`:'';
+  const list=rows.slice(first,30).map((x,k)=>`<div class="rw${nkey(x.name)==me?' me':''}"><div class="n">${k+first+1}</div>${av(x.name)}<div class="in2"><div class="nm">${esc(x.name)}${x.cls?` <small class="mute">${esc(x.cls)}</small>`:''}</div><div class="bar2"><i style="width:${x.total?x.score/x.total*100:0}%"></i></div>${dots(x)}</div><div class="sc">${x.score}/${x.total}<small>${q?x.n+(x.n>1?' quizzes':' quiz'):fmt(x.sec)}</small></div></div>`).join('');
+  el.innerHTML=tabs+(rows.length?`${mi>=0?`<p class="mute" style="text-align:center">Você está em <b>${mi+1}º lugar</b> de ${rows.length}</p>`:''}${podium}${list}<p class="mute" style="text-align:center">${rows.length} participante${rows.length>1?'s':''} · empate decidido pelo menor tempo${!RKD.answered&&!q?'<br>🔒 Responda ao quiz para ver os acertos (●) de cada colega':''}</p>`:'<p class="mute" style="text-align:center">Ninguém no ranking ainda. Seja o primeiro!</p>');
 }
 document.addEventListener('click',e=>{
   const t=e.target,id=D&&qid(W);
+  if(t.dataset&&t.dataset.au)return openAudio(t.dataset.au);
   if(t.dataset&&t.dataset.qo!==undefined)return answer(+t.dataset.qo);
   if(t.id=='qgo'){const n=$('qn').value.trim();if(n.length<2){$('qn').focus();$('qn').placeholder='Digite seu nome (mín. 2 letras)';return}
     S.name=n;S.cls=$('qc').value.trim();S.qp[id]={t0:Date.now(),ans:[],qs:quizFor(W)};save();return renderQuiz()}
   if(t.id=='qnx'){const p=S.qp[id];return p&&p.ans.length>=p.qs.length?finish(id):renderQuiz()}
   if(t.id=='qrg'){const n=$('qrn').value.trim(),r=S.qz[id];if(n.length<2||!r)return;r.name=S.name=n;r.dup=0;save();trySend(id);return renderQuiz()}
-  if(t.dataset&&t.dataset.rk){if(t.dataset.rk=='retry')RKD=null;else RKF=t.dataset.rk;loadRank(id,S.qz[id])}
+  if(t.dataset&&(t.dataset.rk||t.dataset.rs)){if(t.dataset.rk=='retry')RKD=null;else if(t.dataset.rk)RKF=t.dataset.rk;else{RKS=t.dataset.rs;RKD=null}loadRank(id)}
 });
 addEventListener('online',retrySends);
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
