@@ -3,7 +3,7 @@
    Os textos das versões (ACF/AA/NVI) e a lição são guardados pela página no Cache Storage
    (caches "ess-biblia-v1" e "ess-licoes-v1"), que este arquivo não toca. */
 
-const SHELL = "ess-shell-v7";
+const SHELL = "ess-shell-v8";
 const ASSETS = [
   "./",
   "./index.html",
@@ -23,7 +23,7 @@ const ASSETS = [
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(SHELL)
-      .then(cache => cache.addAll(ASSETS))
+      .then(cache => Promise.all(ASSETS.map(a => cache.add(a).catch(() => {}))))
       .then(() => self.skipWaiting())
   );
 });
@@ -48,8 +48,10 @@ self.addEventListener("fetch", event => {
   if (url.origin !== self.location.origin) {
     // Imagens de outros sites (capas da CPB / repositório): guarda para ver offline.
     if (/\.(png|jpe?g|webp|gif)$/i.test(url.pathname)) {
-      event.respondWith(caches.open("ess-img-v1").then(c => c.match(req).then(hit => hit ||
-        fetch(req).then(res => { if (res && (res.ok || res.type === "opaque")) c.put(req, res.clone()); return res; }))));
+      event.respondWith(caches.open("ess-img-v1").then(c => c.match(req).then(hit => {
+        const net = fetch(req).then(res => { if (res && (res.ok || res.type === "opaque")) c.put(req, res.clone()); return res; }).catch(() => hit);
+        return hit || net;
+      })));
     }
     return;
   }
@@ -57,7 +59,7 @@ self.addEventListener("fetch", event => {
   // Dados da lição: rede primeiro (para pegar atualizações) e, sem internet, a cópia guardada.
   if (url.pathname.includes("/data/") || url.pathname.endsWith("/config.js")) {
     event.respondWith(
-      fetch(req).then(res => {
+      fetch(req, { cache: "no-cache" }).then(res => {
         if (res && res.ok) { const copy = res.clone(); caches.open(SHELL).then(c => c.put(req, copy)); }
         return res;
       }).catch(() => caches.match(req))

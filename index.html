@@ -408,9 +408,17 @@ function adopt(d){
   S.qid=d.id;save();D=d;
 }
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),4500)}
-let chk=0;
+let chk=0,dchk=0;
+async function refreshData(force){
+  if(!navigator.onLine||(!force&&Date.now()-dchk<6e5))return false;dchk=Date.now();
+  const g=n=>fetch('data/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>null);
+  const [c,a,z]=await Promise.all([g('capas'),g('audios'),g('quiz')]),old=JSON.stringify([CAP,AUD,QZ]);
+  if(c)CAP=c;if(a)AUD=a;if(z)QZ=z;
+  return JSON.stringify([CAP,AUD,QZ])!=old;
+}
 async function autoSync(force){
   if(!navigator.onLine)return false;
+  try{if(await refreshData(force)&&D&&!(document.activeElement&&/^(TEXTAREA|INPUT)$/.test(document.activeElement.tagName)))draw()}catch(e){}
   if(!force&&Date.now()-chk<36e5)return false;chk=Date.now();
   try{
     const f=await findQuarter();if(!f)return false;
@@ -427,9 +435,10 @@ async function autoSync(force){
     return true;
   }catch(e){return false}
 }
+const byN=(m,n)=>{const o=(m&&m[D.id])||{};return o[n]||o[String(n).padStart(2,'0')]};
 function hero(wi,di){
   if(di)return'';
-  const w=D.weeks[wi],c=(CAP[D.id]||{})[w.n]||{},im=c.img||GH+D.id+'/cover.png',per=c.periodo||addDay(w.start,0,1)+' a '+addDay(w.end,0,1);
+  const w=D.weeks[wi],c=byN(CAP,w.n)||{},im=c.img||GH+D.id+'/cover.png',per=c.periodo||addDay(w.start,0,1)+' a '+addDay(w.end,0,1);
   return`<div class="hero${di?' slim':''}"><img src="${esc(im)}" alt="Capa da lição ${w.n}" referrerpolicy="no-referrer" onerror="this.style.display='none'">${di?'':`<div class="hc"><small>Lição ${w.n} · ${esc(D.title)}</small><b>${esc(w.title)}</b><span>${per}${c.link?` · <a href="${esc(c.link)}" target="_blank" rel="noopener">ver no CPB mais ↗</a>`:''}</span></div>`}</div>`;
 }
 addEventListener('online',()=>{chk=0;autoSync()});
@@ -443,7 +452,7 @@ function renderHome(){
   const cw=curW(),tot=D.weeks.length*7,rd=D.weeks.reduce((a,_,i)=>a+weekRead(i),0),cov=GH+D.id+'/cover.png',f=D.weeks[0],l=D.weeks[D.weeks.length-1];
   $('app').innerHTML=`<div class="qh"><img src="${cov}" alt="Capa do trimestre" referrerpolicy="no-referrer" onerror="this.style.display='none'"><div><small>${esc(D.human)}</small><b>${esc(D.title)}</b><span>${D.weeks.length} lições · ${f.start.slice(0,5)} a ${l.end.slice(0,5)}</span><div class="pg"><i style="width:${rd/tot*100}%"></i></div><span>${rd} de ${tot} dias estudados</span></div></div>
   <h3 class="hh">Lições do trimestre</h3>`+D.weeks.map((w,i)=>{
-    const c=(CAP[D.id]||{})[w.n]||{},n=weekRead(i),per=c.periodo||addDay(w.start,0,1)+' a '+addDay(w.end,0,1);
+    const c=byN(CAP,w.n)||{},n=weekRead(i),per=c.periodo||addDay(w.start,0,1)+' a '+addDay(w.end,0,1);
     return`<div class="wk${i==cw?' cur':''}" role="button" tabindex="0" data-w="${i}"><img src="${esc(c.img||cov)}" alt="" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.visibility='hidden'"><div><small>Lição ${w.n} · ${per}</small><b>${esc(w.title)}</b><div class="pg"><i style="width:${n/7*100}%"></i></div></div><div class="r">${i==cw?'<em>Semana atual</em>':''}${n==7?'✓ concluída':n+'/7'}</div></div>`}).join('');
   const el=$('app').querySelector('.wk.cur');if(el)setTimeout(()=>el.scrollIntoView({block:'nearest'}),60);
 }
@@ -466,7 +475,7 @@ addEventListener('scroll',()=>{const y=scrollY,h=$('hd');
   ly=y},{passive:true});
 /* ===== áudio da lição (CPB mais) ===== */
 function audioBox(wi,di){
-  const a=(AUD[D.id]||{})[D.weeks[wi].n];if(!a||(!a.page&&!(a.files&&a.files.length)))return'';
+  const a=byN(AUD,D.weeks[wi].n);if(!a||(!a.page&&!(a.files&&a.files.length)))return'';
   const fl=a.files||[],f=fl[di]||(fl.length==1?fl[0]:'');
   return`<div class="au"><small>🎧 Áudio da lição · CPB mais</small>${f?`<audio controls preload="none" src="${esc(f)}"></audio>`:`<button class="bt2" data-au="${esc(a.page)}">▶ Ouvir aqui no app</button>`}</div>`;
 }
@@ -597,7 +606,7 @@ document.addEventListener('click',e=>{
 addEventListener('online',retrySends);
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 apply();
-const jf=u=>fetch(u).then(r=>r.json()).catch(()=>({}));
+const jf=u=>fetch(u,{cache:'no-cache'}).then(r=>r.json()).catch(()=>({}));
 Promise.all([loadLesson(),jf('data/capas.json'),jf('data/audios.json'),jf('data/quiz.json')]).then(([d,c,a,z])=>{CAP=c;AUD=a;QZ=z;adopt(d);VIEW='home';draw();autoSync();retrySends()}).catch(()=>{$('app').innerHTML='<p class="intro">Não foi possível carregar a lição. Conecte-se à internet uma vez para salvá-la neste aparelho.</p>'});
 </script>
 </body>
