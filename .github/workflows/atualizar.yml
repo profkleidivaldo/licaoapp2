@@ -1,26 +1,44 @@
 name: Atualizar lição e capas
+
 on:
-  schedule: [{cron: '0 9 * * *'}]
+  # Automático: a CPB publica capa e áudio da lição nova em horário variável,
+  # então verifica a cada 6 horas (o commit só acontece se algo mudou).
+  schedule: [{cron: '15 */6 * * *'}]
+  # Automático: roda sozinho quando você envia este arquivo ou os scripts ao GitHub.
+  push:
+    paths: ['.github/workflows/atualizar.yml', 'tools/**']
+  # Manual (opcional): Actions → Run workflow.
   workflow_dispatch:
+
 permissions:
   contents: write
+
+concurrency:
+  group: atualizar
+  cancel-in-progress: false
+
 jobs:
   atualizar:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: pip install pyyaml
-      - run: python tools/atualizar_capas.py
+      - name: Capas (CPB mais)
+        run: python tools/atualizar_capas.py
         continue-on-error: true
-      - run: python tools/atualizar_audios.py
+      - name: Áudios (CPB mais)
+        run: python tools/atualizar_audios.py
         continue-on-error: true
-      - run: |
+      - name: Lição do trimestre (Adventech)
+        run: |
           git clone --depth 1 --filter=blob:none --sparse https://github.com/Adventech/sabbath-school-lessons.git /tmp/ss
           git -C /tmp/ss sparse-checkout set src/pt
           python tools/gerar_licao.py /tmp/ss/src/pt auto
-      - run: |
+      - name: Salvar alterações
+        run: |
           git config user.name "github-actions"; git config user.email "actions@github.com"
           git add -A
-          git diff --cached --quiet || (git commit -m "Atualiza lição e capas" && git push)
+          git diff --cached --quiet || (git commit -m "Atualiza lição e capas" && git pull --rebase -q && git push)
