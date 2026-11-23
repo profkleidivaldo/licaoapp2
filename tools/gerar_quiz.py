@@ -8,10 +8,13 @@ Uso:
   export GROQ_API_KEY=gsk_...
   python tools/gerar_quiz.py              # gera só as semanas que ainda não têm quiz
   python tools/gerar_quiz.py --semana 3   # só a lição 3 (se já existir, precisa de --refazer)
-  python tools/gerar_quiz.py --refazer    # regera mesmo as que já existem (muda as perguntas do ranking!)
+  python tools/gerar_quiz.py --refazer    # regera mesmo as que já existem
+  python tools/gerar_quiz.py --refazer --a-partir 5   # refaz da lição 5 em diante (preserva as anteriores)
 
-Semanas que já têm quiz em data/quiz.json NUNCA são sobrescritas sem --refazer: trocar as perguntas
-no meio da semana invalidaria as notas já enviadas ao ranking.
+Semanas que já têm quiz em data/quiz.json NUNCA são sobrescritas sem --refazer.
+Quem já respondeu uma semana continua vendo as próprias perguntas e a nota (ficam salvas no aparelho);
+quem ainda não respondeu passa a ver as novas. Por justiça no ranking, prefira refazer só semanas ainda
+sem respostas (use --a-partir).
 """
 import json, os, sys, time, random, argparse, urllib.request, urllib.error
 
@@ -134,6 +137,7 @@ def gerar_semana(w, chave, tentativas=3):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--semana', type=int, help='número da lição (1-13)')
+    ap.add_argument('--a-partir', type=int, default=0, help='só da lição N em diante')
     ap.add_argument('--refazer', action='store_true', help='sobrescreve quizzes já existentes')
     a = ap.parse_args()
     chave = os.environ.get('GROQ_API_KEY', '').strip()
@@ -145,6 +149,7 @@ def main():
     feitos = 0
     for w in lic['weeks']:
         if a.semana and w['n'] != a.semana: continue
+        if w['n'] < a.a_partir: continue
         qid = f"{lic['id']}-{w['n']:02d}"
         if quiz.get(qid) and not a.refazer: print(f'lição {w["n"]}: já tem quiz, pulando'); continue
         print(f'lição {w["n"]}: gerando com {MODEL}…')
@@ -152,7 +157,7 @@ def main():
         if not qs: print('  falhou; fica o quiz automático do app'); continue
         quiz[qid] = qs; feitos += 1
         json.dump(quiz, open(arq, 'w', encoding='utf8'), ensure_ascii=False, indent=1)  # grava a cada semana
-        time.sleep(2)
+        time.sleep(10)  # respeita o limite de tokens por minuto da Groq
     print(f'{feitos} quiz(zes) novo(s) em {arq}')
 
 
