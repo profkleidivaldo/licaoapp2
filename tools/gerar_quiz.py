@@ -17,6 +17,9 @@ quem ainda não respondeu passa a ver as novas. Por justiça no ranking, prefira
 sem respostas (use --a-partir).
 """
 import json, os, sys, time, random, argparse, urllib.request, urllib.error
+sys.stdout.reconfigure(line_buffering=True)  # mostra o log em tempo real no GitHub Actions
+INICIO = time.time()
+LIMITE = 25 * 60  # para sozinho antes do timeout do workflow; o que já foi gerado fica salvo
 
 URL = 'https://api.groq.com/openai/v1/chat/completions'
 MODEL = os.environ.get('GROQ_MODEL', 'openai/gpt-oss-120b')
@@ -66,24 +69,24 @@ SCHEMA = {
     'required': ['perguntas'], 'additionalProperties': False}
 
 
-def texto_semana(w):
+def texto_semana(w, max_dia=None):
     partes = [f"Lição {w['n']}: {w['title']}"]
     if w.get('reads'): partes.append('Leituras da semana: ' + w['reads'])
     for i, d in enumerate(w['days']):
-        partes.append(f"\n=== DIA {i} ({DAYS[i]}): {d['t']} ===\n{d['md'].strip()}")
+        partes.append(f"\n=== DIA {i} ({DAYS[i]}): {d['t']} ===\n{d['md'].strip()[:max_dia]}")
     return '\n'.join(partes)
 
 
 def chamar(prompt, chave, json_schema=True):
     corpo = {
-        'model': MODEL, 'temperature': 0.7, 'max_completion_tokens': 6000, 'reasoning_effort': 'low',
+        'model': MODEL, 'temperature': 0.7, 'max_completion_tokens': 3500, 'reasoning_effort': 'low',
         'messages': [{'role': 'system', 'content': SISTEMA}, {'role': 'user', 'content': prompt}],
         'response_format': {'type': 'json_schema', 'json_schema': {'name': 'quiz', 'schema': SCHEMA}}
         if json_schema else {'type': 'json_object'}}
     req = urllib.request.Request(URL, json.dumps(corpo).encode(), {
         'Authorization': 'Bearer ' + chave, 'Content-Type': 'application/json', 'User-Agent': 'licaoapp-quiz/1.0'})
     try:
-        with urllib.request.urlopen(req, timeout=120) as r:
+        with urllib.request.urlopen(req, timeout=90) as r:
             return json.loads(r.read())['choices'][0]['message']['content']
     except urllib.error.HTTPError as e:
         detalhe = e.read().decode('utf8', 'ignore')[:300]
@@ -91,6 +94,7 @@ def chamar(prompt, chave, json_schema=True):
             print('  json_schema recusado, tentando json_object:', detalhe)
             return chamar(prompt, chave, json_schema=False)
         e.detalhe = detalhe
+        e.espera = e.headers.get('retry-after') if e.headers else None
         raise
 
 
@@ -121,16 +125,25 @@ def validar(dados, w):
 
 
 def gerar_semana(w, chave, tentativas=3):
-    prompt = INSTRUCOES + texto_semana(w)
+    max_dia = None
     for t in range(1, tentativas + 1):
+        if time.time() - INICIO > LIMITE: print('  tempo limite do script atingido'); return None
         try:
-            return validar(chamar(prompt, chave), w)
+            return validar(chamar(INSTRUCOES + texto_semana(w, max_dia), chave), w)
         except urllib.error.HTTPError as e:
             print(f'  HTTP {e.code} (tentativa {t}): {getattr(e, "detalhe", "")}')
             if e.code in (401, 403): raise SystemExit('Chave da Groq recusada: confira o secret GROQ_API_KEY.')
-            time.sleep(min(60, 8 * t * (3 if e.code == 429 else 1)))
+            if e.code == 413 or 'too large' in getattr(e, 'detalhe', '').lower():
+                max_dia = 1500; print('  pedido grande demais: reduzindo o texto de cada dia')
+                continue
+            try: esp = float(e.espera)
+            except (TypeError, ValueError): esp = 20 * t
+            time.sleep(min(90, esp + 2))
         except (ValueError, KeyError, TypeError, json.JSONDecodeError) as e:
             print(f'  resposta inválida (tentativa {t}): {e}')
+        except OSError as e:  # timeout / rede
+            print(f'  erro de rede (tentativa {t}): {e}')
+            time.sleep(5)
     return None
 
 
@@ -146,7 +159,7 @@ def main():
     lic = json.load(open('data/licao.json', encoding='utf8'))
     arq = 'data/quiz.json'
     quiz = json.load(open(arq, encoding='utf8')) if os.path.exists(arq) else {}
-    feitos = 0
+    feitos = falhas = 0
     for w in lic['weeks']:
         if a.semana and w['n'] != a.semana: continue
         if w['n'] < a.a_partir: continue
@@ -154,7 +167,11 @@ def main():
         if quiz.get(qid) and not a.refazer: print(f'lição {w["n"]}: já tem quiz, pulando'); continue
         print(f'lição {w["n"]}: gerando com {MODEL}…')
         qs = gerar_semana(w, chave)
-        if not qs: print('  falhou; fica o quiz automático do app'); continue
+        if not qs:
+            print('  falhou; fica o quiz automático do app'); falhas += 1
+            if falhas >= 2: print('2 falhas seguidas: parando (veja o erro acima).'); break
+            continue
+        falhas = 0
         quiz[qid] = qs; feitos += 1
         json.dump(quiz, open(arq, 'w', encoding='utf8'), ensure_ascii=False, indent=1)  # grava a cada semana
         time.sleep(10)  # respeita o limite de tokens por minuto da Groq
