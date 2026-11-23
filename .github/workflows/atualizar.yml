@@ -27,7 +27,7 @@ concurrency:
 jobs:
   atualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -47,11 +47,12 @@ jobs:
       - name: Quizzes com IA (Groq gpt-oss) — só semanas que ainda não têm quiz
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        timeout-minutes: 35
         run: |
           if [ "${{ github.event.inputs.refazer_quiz }}" = "sim" ]; then
-            python tools/gerar_quiz.py --refazer --a-partir "${{ github.event.inputs.quiz_a_partir_da_licao || 1 }}"
+            python -u tools/gerar_quiz.py --refazer --a-partir "${{ github.event.inputs.quiz_a_partir_da_licao || 1 }}"
           else
-            python tools/gerar_quiz.py
+            python -u tools/gerar_quiz.py
           fi
         continue-on-error: true
       - name: Salvar alterações
