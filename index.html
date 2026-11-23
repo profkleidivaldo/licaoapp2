@@ -88,11 +88,18 @@ mark.hl{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .orow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
 .orow small{display:block;color:var(--mute)}
 #sbody .go{width:100%;margin-top:14px;background:var(--ok);color:#fff;border-color:var(--ok);font-weight:600;padding:11px}
-#tool{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:30;background:var(--ink);color:var(--bg);border-radius:14px;padding:8px 8px 8px 14px;display:none;gap:8px;align-items:center;max-width:94%;box-shadow:0 6px 24px #0005}
-#tool.on{display:flex}
-#tl{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:46vw}
-#tool button{background:var(--acc);color:#fff;border-color:transparent;font-weight:600}
-#tool #tc{background:transparent;color:var(--bg)}
+#tool{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;background:var(--ink);color:var(--bg);border-radius:16px;padding:14px;display:none;flex-direction:column;gap:12px;width:min(300px,86vw);box-shadow:0 10px 40px #0007;-webkit-user-select:none;user-select:none}
+#tool.on{display:flex;animation:pop .14s ease-out}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-46%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+#tl{font-size:14px;line-height:1.4;text-align:center;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;word-break:break-word}
+#tool .tb{display:flex;gap:8px}
+#tool button{flex:1;padding:10px;background:var(--acc);color:#fff;border-color:transparent;font-weight:600}
+#tool #tc{background:transparent;color:var(--bg);border-color:#fff4}
+@keyframes sl{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes sr{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+#app.sl{animation:sl .22s ease-out}
+#app.sr{animation:sr .22s ease-out}
+@media (prefers-reduced-motion:reduce){#app.sl,#app.sr,#tool.on{animation:none}}
 
 .hero{border-radius:16px;overflow:hidden;background:var(--surf);border:1px solid var(--line);margin-bottom:16px}
 .hero img{display:block;width:100%;height:210px;object-fit:cover;background:var(--accs)}
@@ -195,7 +202,7 @@ body.home #hm{display:none}
 <main><div class="wrap" id="app"><p class="intro">Carregando a lição…</p></div></main>
 <div id="sheet" hidden><div class="sc"><div class="sh"><span id="st"></span><button id="sx" aria-label="Fechar">✕</button></div><div id="sv"></div><div id="sbody" class="hlz"></div><div id="sf"></div></div></div>
 <div id="toast" role="status"></div>
-<div id="tool"><span id="tl"></span><button id="tg"></button><button id="tc" aria-label="Fechar">✕</button></div>
+<div id="tool" role="dialog" aria-live="polite"><span id="tl"></span><div class="tb"><button id="tc">Cancelar</button><button id="tg"></button></div></div>
 <script src="config.js"></script>
 <script>
 let D,CAP={},AUD={},QZ={};const BK=[["Gn","Gênesis",50],["Ex","Êxodo",40],["Lv","Levítico",27],["Nm","Números",36],["Dt","Deuteronômio",34],["Js","Josué",24],["Jz","Juízes",21],["Rt","Rute",4],["1Sm","1 Samuel",31],["2Sm","2 Samuel",24],["1Rs","1 Reis",22],["2Rs","2 Reis",25],["1Cr","1 Crônicas",29],["2Cr","2 Crônicas",36],["Ed","Esdras",10],["Ne","Neemias",13],["Et","Ester",10],["Jó","Jó",42],["Sl","Salmos",150],["Pv","Provérbios",31],["Ec","Eclesiastes",12],["Ct","Cantares",8],["Is","Isaías",66],["Jr","Jeremias",52],["Lm","Lamentações",5],["Ez","Ezequiel",48],["Dn","Daniel",12],["Os","Oséias",14],["Jl","Joel",3],["Am","Amós",9],["Ob","Obadias",1],["Jn","Jonas",4],["Mq","Miquéias",7],["Na","Naum",3],["Hc","Habacuque",3],["Sf","Sofonias",3],["Ag","Ageu",2],["Zc","Zacarias",14],["Ml","Malaquias",4],["Mt","Mateus",28],["Mc","Marcos",16],["Lc","Lucas",24],["Jo","João",21],["At","Atos",28],["Rm","Romanos",16],["1Co","1 Coríntios",16],["2Co","2 Coríntios",13],["Gl","Gálatas",6],["Ef","Efésios",6],["Fp","Filipenses",4],["Cl","Colossenses",4],["1Ts","1 Tessalonicenses",5],["2Ts","2 Tessalonicenses",3],["1Tm","1 Timóteo",6],["2Tm","2 Timóteo",4],["Tt","Tito",3],["Fm","Filemom",1],["Hb","Hebreus",13],["Tg","Tiago",5],["1Pe","1 Pedro",5],["2Pe","2 Pedro",3],["1Jo","1 João",5],["2Jo","2 João",1],["3Jo","3 João",1],["Jd","Judas",1],["Ap","Apocalipse",22]];
@@ -240,10 +247,10 @@ function draw(){
   <h2>${inl(d.t)}</h2>${audioBox(W,Dy)}${Dy==0&&w.reads?`<div class="intro"><strong>Leituras da semana:</strong> ${inl(w.reads)}</div>`:''}
   <div class="read hlz" style="--fs:${S.fs}px">${render(d.md,W,Dy)}</div>
   <div class="nav"><button id="pv" ${Dy==0&&W==0?'disabled':''}>← Anterior</button><button class="go${done?' undo':''}" id="mk">${done?'✓ Estudado (desfazer)':'Marcar como estudado'}</button><button id="nx">Próximo →</button></div>
-  <p class="hint">Selecione um trecho para grifar · toque numa referência bíblica para ler o versículo · respostas e grifos ficam salvos só neste aparelho.</p>`;applyAll($('app'));
+  <p class="hint">Selecione um trecho para grifar · deslize para os lados para mudar de dia · toque numa referência bíblica para ler o versículo · respostas e grifos ficam salvos só neste aparelho.</p>`;applyAll($('app'));
 }
 function addDay(s,i,long){const x=pd(s);x.setDate(x.getDate()+i);return long?x.toLocaleDateString('pt-BR',{day:'numeric',month:'long'}):x.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}
-function go(w,d){VIEW='day';W=w;Dy=d;draw();scrollTo({top:0,behavior:'smooth'})}
+function go(w,d){hideTool();VIEW='day';W=w;Dy=d;draw();scrollTo({top:0,behavior:'smooth'})}
 function today(){const t=new Date();t.setHours(0,0,0,0);
   let wi=D.weeks.findIndex(w=>t>=pd(w.start)&&t<=pd(w.end));
   if(wi<0)wi=t<pd(D.weeks[0].start)?0:D.weeks.length-1;
@@ -273,12 +280,12 @@ function applyScope(el){
 }
 const applyAll=root=>root.querySelectorAll('[data-hs]').forEach(applyScope);
 const merge=a=>{a.sort((x,y)=>x[0]-y[0]);const o=[];for(const v of a){const l=o[o.length-1];if(l&&v[0]<=l[1])l[1]=Math.max(l[1],v[1]);else o.push(v.slice())}return o};
-let pend=null,selT;
+let pend=null,selT,toolDown=false;
 const hideTool=()=>{pend=null;$('tool').classList.remove('on')};
-const showTool=(l,b)=>{$('tl').textContent=l;$('tg').textContent=b;$('tool').classList.add('on')};
+const showTool=(l,b)=>{$('tl').style.whiteSpace='pre-line';$('tl').textContent=l;$('tg').textContent=b;$('tool').classList.add('on')};
 function evalSel(){
   const sel=getSelection();
-  if(!sel.rangeCount||sel.isCollapsed||(document.activeElement&&document.activeElement.tagName=='TEXTAREA')){if(!pend||pend.t=='add')hideTool();return}
+  if(!sel.rangeCount||sel.isCollapsed||(document.activeElement&&document.activeElement.tagName=='TEXTAREA')){if(!toolDown&&(!pend||pend.t=='add'))hideTool();return}
   const r=sel.getRangeAt(0),ce=r.commonAncestorContainer,el=ce.nodeType==1?ce:ce.parentElement,z=el&&el.closest('.hlz');
   if(!z){hideTool();return}
   const out=[];
@@ -287,9 +294,12 @@ function evalSel(){
           b=r.compareBoundaryPoints(Range.END_TO_END,er)>0?scopeLen(s):offOf(s,r.endContainer,r.endOffset);
     if(b>a)out.push([s.dataset.hs,a,b])});
   if(!out.length){hideTool();return}
-  pend={t:'add',out};const t=sel.toString().trim();showTool('“'+(t.length>50?t.slice(0,50)+'…':t)+'”','Grifar');
+  pend={t:'add',out};const t=sel.toString().trim();showTool('Grifar este trecho?\n“'+(t.length>120?t.slice(0,120)+'…':t)+'”','Grifar');
 }
-document.addEventListener('selectionchange',()=>{clearTimeout(selT);selT=setTimeout(evalSel,220)});
+/* aguarda a seleção ficar parada (o usuário ainda pode estar ajustando as alças) antes de abrir o popup central */
+document.addEventListener('selectionchange',()=>{clearTimeout(selT);selT=setTimeout(evalSel,450)});
+/* tocar no popup pode limpar a seleção em alguns navegadores; evita que ele some antes do clique */
+$('tool').addEventListener('pointerdown',()=>{toolDown=true;setTimeout(()=>{toolDown=false},700)});
 $('tg').onclick=()=>{if(!pend)return;let ids;
   if(pend.t=='add'){ids=pend.out.map(o=>o[0]);pend.out.forEach(([id,a,b])=>{HL[id]=merge([...(HL[id]||[]),[a,b]])})}
   else{ids=[pend.id];const l=HL[pend.id];l.splice(pend.i,1);if(!l.length)delete HL[pend.id]}
@@ -465,6 +475,27 @@ function openWeek(i){
 $('hm').onclick=()=>{if(VIEW=='home')today();else{VIEW='home';draw();scrollTo({top:0})}};
 document.addEventListener('click',e=>{const k=e.target.closest('.wk');if(k)openWeek(+k.dataset.w)});
 document.addEventListener('keydown',e=>{if(e.key=='Enter'&&e.target.classList&&e.target.classList.contains('wk'))openWeek(+e.target.dataset.w)});
+/* ===== gesto: deslizar para os lados troca de dia (esquerda = próximo, direita = anterior) ===== */
+(()=>{let x0,y0,t0,ok=false;
+  const BLOCK='textarea,input,select,audio,iframe,.tabs,#sheet,#menu,#tool,.rk,table,pre';
+  addEventListener('touchstart',e=>{
+    ok=false;if(e.touches.length!=1||VIEW!='day'||Dy==7||!D)return;
+    if(e.target.closest&&e.target.closest(BLOCK))return;
+    const s=getSelection();if(s&&!s.isCollapsed)return;
+    x0=e.touches[0].clientX;y0=e.touches[0].clientY;t0=Date.now();ok=true},{passive:true});
+  addEventListener('touchend',e=>{
+    if(!ok)return;ok=false;
+    const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;
+    if(Date.now()-t0>800||Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.7)return;
+    const s=getSelection();if(s&&!s.isCollapsed)return; // virou seleção de texto, não deslize
+    let nw=W,nd=Dy;
+    if(dx<0){if(Dy<6)nd=Dy+1;else nd=7}          // sexta → quiz
+    else{if(Dy>0)nd=Dy-1;else if(W>0){nw=W-1;nd=7}else return}
+    go(nw,nd);
+    const a=$('app');a.classList.remove('sl','sr');void a.offsetWidth;a.classList.add(dx<0?'sl':'sr');
+    },{passive:true});
+  addEventListener('touchcancel',()=>{ok=false},{passive:true});
+})();
 /* ===== menu de leitura e cabeçalho que se oculta ao rolar ===== */
 $('mn').onclick=()=>{$('menu').hidden=!$('menu').hidden};
 document.addEventListener('click',e=>{if(e.target.id=='of'||(!e.target.closest('#menu')&&e.target.id!='mn'))$('menu').hidden=true});
