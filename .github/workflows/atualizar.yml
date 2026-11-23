@@ -37,6 +37,11 @@ jobs:
           git clone --depth 1 --filter=blob:none --sparse https://github.com/Adventech/sabbath-school-lessons.git /tmp/ss
           git -C /tmp/ss sparse-checkout set src/pt
           python tools/gerar_licao.py /tmp/ss/src/pt auto
+      - name: Quizzes com IA (Groq gpt-oss) — só semanas que ainda não têm quiz
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python tools/gerar_quiz.py
+        continue-on-error: true
       - name: Salvar alterações
         run: |
           git config user.name "github-actions"; git config user.email "actions@github.com"
