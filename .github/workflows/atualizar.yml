@@ -9,6 +9,13 @@ on:
     paths: ['.github/workflows/atualizar.yml', 'tools/**']
   # Manual (opcional): Actions → Run workflow.
   workflow_dispatch:
+    inputs:
+      refazer_quiz:
+        description: 'Refazer quizzes que já existem? (sim/não)'
+        default: 'não'
+      quiz_a_partir_da_licao:
+        description: 'Se refazer: a partir de qual lição (1 = todas)'
+        default: '1'
 
 permissions:
   contents: write
@@ -40,7 +47,12 @@ jobs:
       - name: Quizzes com IA (Groq gpt-oss) — só semanas que ainda não têm quiz
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        run: python tools/gerar_quiz.py
+        run: |
+          if [ "${{ github.event.inputs.refazer_quiz }}" = "sim" ]; then
+            python tools/gerar_quiz.py --refazer --a-partir "${{ github.event.inputs.quiz_a_partir_da_licao || 1 }}"
+          else
+            python tools/gerar_quiz.py
+          fi
         continue-on-error: true
       - name: Salvar alterações
         run: |
