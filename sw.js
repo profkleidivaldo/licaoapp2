@@ -3,7 +3,7 @@
    Os textos das versões (ACF/AA/NVI) e a lição são guardados pela página no Cache Storage
    (caches "ess-biblia-v1" e "ess-licoes-v1"), que este arquivo não toca. */
 
-const SHELL = "ess-shell-v9";
+const SHELL = "ess-shell-v10";
 const ASSETS = [
   "./",
   "./index.html",
@@ -97,5 +97,41 @@ self.addEventListener("fetch", event => {
         return res;
       })
     )
+  );
+});
+
+/* ===== Lembrete: o servidor (push/worker.js) só envia o aviso a quem ainda não estudou o dia ===== */
+const MSGS = [
+  "Que tal reservar uns minutos para a lição de hoje?",
+  "A lição de hoje ainda está esperando por você.",
+  "Um passo de cada vez: abra a lição de hoje e estude agora.",
+  "Ainda dá tempo de estudar a lição de hoje."
+];
+
+self.addEventListener("push", event => {
+  const agora = new Date();
+  const dia = agora.toLocaleDateString("pt-BR", { weekday: "long" });
+  event.waitUntil(self.registration.showNotification("📖 Escola Sabatina · " + dia, {
+    body: MSGS[agora.getHours() % MSGS.length],
+    icon: "./icon-192.png",
+    badge: "./icon-192.png",
+    tag: "licao-hoje",      // substitui o aviso anterior em vez de empilhar
+    renotify: true,
+    data: { url: "./?hoje=1" }
+  }));
+});
+
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(list => {
+      for (const c of list) {
+        if (c.url.startsWith(self.registration.scope) && "focus" in c) {
+          c.postMessage({ hoje: true });
+          return c.focus();
+        }
+      }
+      return self.clients.openWindow("./?hoje=1");
+    })
   );
 });
