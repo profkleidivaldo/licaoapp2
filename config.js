@@ -4,5 +4,5 @@
 // Deixe pushUrl vazio e o botão 🔔 do menu não aparece.
 window.ESS_CONFIG = {
   apiUrl: "https://script.google.com/macros/s/AKfycbyBRyLjdFSwE702ZSjOsYiFJxevQr0qdoqsXfpE4U4WzX5aJ1clRUKgwEf7PQWEQ98eog/exec",
-  pushUrl: ""
+  pushUrl: "https://licao-lembrete.profkleidivaldo.workers.dev"
 };
