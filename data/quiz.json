@@ -1,86 +1,1094 @@
 {
- "2026-04-02": [
+ "2026-04-01": [
   {
-   "h": "Sábado · O chamado de um profeta",
-   "q": "Qual foi a resposta de Isaías ao ouvir a pergunta de Deus: “A quem enviarei, e quem há de ir por Nós?”",
+   "h": "Sábado · O Criador fala",
+   "q": "Segundo Hebreus 1:1, 2, por meio de quem Deus falou conosco “nestes últimos dias”?",
    "o": [
-    "Deixe-me pensar antes de ir",
-    "Não sei, mas obedecerei",
-    "Eis-me aqui, envia-me a mim",
-    "Estou pronto, envia-me agora"
+    "Pelos sacerdotes, que guardaram a lei no santuário",
+    "Pelos profetas, a quem constituiu herdeiros de todas as coisas",
+    "Pelos anjos, que foram enviados a todas as nações",
+    "Pelo Filho, a quem constituiu herdeiro de todas as coisas"
    ],
-   "a": 2,
-   "e": "Veja o estudo de sábado que apresenta o verso de Isaías 6:8 como verso para memorizar."
+   "a": 3,
+   "e": "Veja o verso do sábado: antes Deus falou pelos profetas; agora, pelo Filho, por quem fez o Universo."
   },
   {
-   "h": "Domingo · Abraão, guardião da aliança",
-   "q": "Por que Abraão foi considerado exemplo de fé para as gerações futuras?",
+   "h": "Domingo · Comunicação no Éden",
+   "q": "O que diferenciava os seres humanos das demais criaturas da Terra desde a criação?",
    "o": [
-    "Ele evitou toda idolatria ao redor",
-    "Ele escreveu as leis de Deus",
-    "Ele confiou em Deus mesmo quando pediu que sacrificasse seu filho",
-    "Ele recebeu riquezas sem esforço"
+    "Foram feitos “à imagem de Deus”, algo dito só a respeito deles",
+    "Receberam o sábado como único dia de descanso entre os seres vivos",
+    "Foram os únicos a ter o Éden inteiro sob seus cuidados diretos",
+    "Foram criados antes das aves e dos outros animais do jardim"
    ],
-   "a": 2,
-   "e": "Veja o estudo de domingo que destaca a prova de fé de Abraão ao oferecer Isaque."
+   "a": 0,
+   "e": "O estudo de domingo destaca que “à imagem de Deus” (Gn 1:27) não é dito de aves ou outros animais."
   },
   {
-   "h": "Segunda · A mensagem de Elias",
-   "q": "Elias foi enviado ao rei Acabe para anunciar uma longa seca como forma de afastar o povo da idolatria.",
+   "h": "Segunda · Escondendo-se de Deus",
+   "q": "Segundo o estudo, Adão e Eva foram criados livres para obedecer ou desobedecer, pois o amor envolve escolha.",
    "o": [
     "Verdadeiro",
     "Falso"
    ],
    "a": 0,
-   "e": "Consulte o estudo de segunda-feira sobre a mensagem de Elias em 1Rs 18:19‑39."
+   "e": "O estudo de segunda explica que Deus não criou “robôs”: sem liberdade de escolha, a obediência seria forçada."
+  },
+  {
+   "h": "Terça · Deus busca a humanidade",
+   "q": "Qual alternativa NÃO está de acordo com o estudo de terça sobre Gênesis 3:9-13?",
+   "o": [
+    "Eva culpou a serpente, dizendo que ela a havia enganado",
+    "Adão assumiu sozinho a culpa pelo pecado, sem culpar ninguém",
+    "Adão culpou Eva e, indiretamente, o próprio Deus que a deu a ele",
+    "Deus perguntou “Onde você está?” embora soubesse onde eles estavam"
+   ],
+   "a": 1,
+   "e": "Conforme o estudo de terça, nenhum dos dois assumiu a própria culpa naquele primeiro momento."
+  },
+  {
+   "h": "Quarta · Expulsos do jardim",
+   "q": "Que ato de Deus, antes de Adão e Eva saírem do jardim, apontava de forma simbólica para a redenção futura?",
+   "o": [
+    "Plantar uma nova árvore da vida fora do Éden",
+    "Abençoar um novo sábado para a vida fora do Éden",
+    "Enviar um anjo para guiá-los de volta ao jardim",
+    "Providenciar vestes para o casal"
+   ],
+   "a": 3,
+   "e": "O estudo de quarta mostra que as vestes providenciadas por Deus eram um ato simbólico que apontava para a redenção por Jesus."
+  },
+  {
+   "h": "Quinta · Porta-vozes de Deus",
+   "q": "Segundo o estudo, qual foi a forma mais eficaz pela qual Deus falou à humanidade depois da queda?",
+   "o": [
+    "Por meio dos profetas que escreveram livros da Bíblia",
+    "Por meio da criação, que mostra as obras de Deus",
+    "Por meio de Jesus Cristo, revelado nas Escrituras",
+    "Por meio de visões concedidas apenas aos líderes do povo"
+   ],
+   "a": 2,
+   "e": "O estudo de quinta cita Jo 14:9: “Quem vê a Mim vê o Pai”. Criação e profetas também falam, mas Cristo é a forma mais eficaz."
+  },
+  {
+   "h": "Sexta · Ellen White",
+   "q": "Quem ajudou a jovem Ellen Harmon a compreender e experimentar de fato o amor e a graça de Deus?",
+   "o": [
+    "Elizabeth, sua irmã gêmea",
+    "Levi Stockman, um pastor metodista",
+    "Robert Harmon, seu próprio pai",
+    "Um pastor milerita da cidade de Portland"
+   ],
+   "a": 1,
+   "e": "O estudo de sexta conta que, ao conhecer Levi Stockman, Ellen passou a ver Deus como um Pai bondoso, não um tirano severo."
+  }
+ ],
+ "2026-04-02": [
+  {
+   "h": "Sábado · O chamado de um profeta",
+   "q": "Em Isaías 6:8, qual foi a resposta de Isaías quando ouviu: “A quem enviarei, e quem há de ir por Nós?”",
+   "o": [
+    "“Sou um homem de lábios impuros, não posso ir”",
+    "“Fala, Senhor, porque o Teu servo escuta”",
+    "“Eis-me aqui, envia-me a mim”",
+    "“Senhor, envia outro mais capaz do que eu”"
+   ],
+   "a": 2,
+   "e": "É o verso para memorizar da semana (sábado): a resposta de Isaías deveria ser também a nossa."
+  },
+  {
+   "h": "Domingo · Abraão, guardião da aliança",
+   "q": "Para testar a fé de Abraão e ilustrar o futuro sacrifício do Filho de Deus, o que o Senhor lhe pediu?",
+   "o": [
+    "Que expulsasse Ismael e a mãe dele para o deserto",
+    "Que construísse uma torre para guardar a aliança",
+    "Que oferecesse seu filho Isaque em sacrifício",
+    "Que entregasse todos os seus rebanhos no altar"
+   ],
+   "a": 2,
+   "e": "Veja o estudo de domingo: Deus impediu o sacrifício e providenciou um carneiro no lugar de Isaque."
+  },
+  {
+   "h": "Segunda · A mensagem de Elias",
+   "q": "No monte Carmelo, qual foi o apelo de Elias ao povo de Israel?",
+   "o": [
+    "Rejeitar os falsos deuses e voltar-se ao Senhor",
+    "Preparar-se para uma guerra contra o rei Acabe",
+    "Esperar em silêncio o fim do período de seca",
+    "Oferecer mais sacrifícios nos altares de Baal"
+   ],
+   "a": 0,
+   "e": "O estudo de segunda mostra Elias chamando a nação idólatra a abandonar Baal e Aserá e a voltar ao Deus verdadeiro."
   },
   {
    "h": "Terça · Isaías, o profeta do evangelho",
-   "q": "Como a profecia de Isaías 53 pode motivar um cristão hoje a confiar na obra de Cristo?",
+   "q": "Segundo o estudo, o chamado profético de Isaías foi fácil e suas previsões de destruição foram bem aceitas pelo povo.",
    "o": [
-    "Mostra que Cristo sofreu por todos, garantindo perdão e esperança para quem crê",
-    "Ensina que a salvação depende de obras humanas",
-    "Sugere que a morte de Cristo foi opcional",
-    "Indica que apenas os judeus serão salvos"
+    "Verdadeiro",
+    "Falso"
    ],
-   "a": 0,
-   "e": "Veja o estudo de terça‑feira que analisa Isaías 53 e o sacrifício substitutivo."
+   "a": 1,
+   "e": "O estudo de terça diz que o chamado não foi fácil: muitos consideraram absurdas as suas graves previsões."
   },
   {
    "h": "Quarta · Daniel, o profeta fiel",
-   "q": "Qual das seguintes afirmações NÃO reflete o testemunho de Daniel aos pagãos?",
+   "q": "Qual alternativa NÃO está de acordo com o que o estudo de quarta diz sobre Daniel?",
    "o": [
-    "Ele demonstrou que o poder de Deus livra dos perigos",
-    "Ele pediu que os reis pagãos abandonassem toda comida e bebam apenas água",
-    "Ele mostrou que o Deus do céu é soberano sobre reis",
-    "Ele revelou mistérios que impressionaram os estrangeiros"
+    "Predisse a sucessão de impérios, como na estátua de Daniel 2",
+    "O nome Daniel significa “Deus é meu Redentor”",
+    "Insistiu numa alimentação à base de vegetais e em beber apenas água",
+    "O tema recorrente de suas profecias é o juízo, que culmina na volta de Cristo"
    ],
    "a": 1,
-   "e": "Consulte o estudo de quarta‑feira que resume o testemunho de Daniel nos capítulos citados."
+   "e": "O estudo de quarta diz que o nome significa “Deus é meu Juiz”, o que combina com o tema do juízo em suas profecias."
   },
   {
    "h": "Quinta · João Batista, preparando um povo",
-   "q": "Qual ligação o estudo faz entre João Batista e a profecia de Isaías 40:3?",
+   "q": "Segundo o estudo, por que Satanás fez com que João Batista fosse preso?",
    "o": [
-    "João cumpre a profecia anunciando a vinda do Senhor no deserto",
-    "Isaías profetizou sobre o nascimento de João",
-    "A profecia descreve a prisão de João",
-    "João escreveu a profecia de Isaías"
+    "Para atingir João e, ao mesmo tempo, ferir o coração de Jesus",
+    "Para fazer João deixar de pregar no deserto da Judeia",
+    "Para que os discípulos de João abandonassem a esperança",
+    "Para impedir que Jesus fosse batizado no rio Jordão"
    ],
    "a": 0,
-   "e": "Veja o estudo de quinta‑feira que relaciona Marcos 1:2‑5 ao cumprimento da mensagem de Isaías."
+   "e": "No estudo de quinta, a prisão foi a nova tática do inimigo depois de ser derrotado por Jesus no deserto."
   },
   {
    "h": "Sexta · Chamada para o ministério profético",
-   "q": "Em que ano Ellen White recebeu seu primeiro chamado profético?",
+   "q": "Qual foi a mensagem principal da primeira visão de Ellen Harmon aos crentes desapontados?",
    "o": [
-    "Março de 1843",
-    "Janeiro de 1845",
-    "Outubro de 1846",
-    "Dezembro de 1844"
+    "Que deveriam abandonar a mensagem e voltar às igrejas de origem",
+    "Que a data da volta de Cristo seria recalculada em poucos meses",
+    "Que a interpretação deles estava toda certa e o desapontamento passaria",
+    "Que Deus ainda estava com eles, desde que mantivessem o olhar fixo em Jesus"
    ],
    "a": 3,
-   "e": "Confira o estudo de sexta‑feira que descreve o início do ministério profético de Ellen Harmon."
+   "e": "O estudo de sexta mostra um caminho rumo à cidade santa: quem mantinha o olhar fixo em Jesus permanecia seguro."
+  }
+ ],
+ "2026-04-03": [
+  {
+   "h": "Sábado · Profetas do Antigo Testamento",
+   "q": "Segundo 2Crônicas 20:20, o que Josafá afirmou que aconteceria a quem crê nos profetas do Senhor?",
+   "o": [
+    "Será chamado de homem de Deus",
+    "Ficará livre de toda perseguição",
+    "Receberá visões como os profetas",
+    "Será bem-sucedido"
+   ],
+   "a": 3,
+   "e": "É o verso para memorizar (sábado): crer no Senhor traz segurança e crer em Seus profetas traz sucesso."
+  },
+  {
+   "h": "Domingo · A humanidade dos profetas",
+   "q": "Depois da grande vitória no monte Carmelo, como Elias reagiu, segundo 1 Reis 19?",
+   "o": [
+    "Desanimou e pediu a Deus que lhe tirasse a vida",
+    "Voltou para casa em silêncio, sem nenhuma preocupação",
+    "Celebrou com o povo e iniciou uma reforma no reino",
+    "Exigiu de Deus um novo milagre para convencer Acabe"
+   ],
+   "a": 0,
+   "e": "O estudo de domingo mostra que Elias “era humano como nós”: mesmo após um milagre, sentiu desânimo e fragilidade."
+  },
+  {
+   "h": "Segunda · Identificando os profetas verdadeiros",
+   "q": "O que Micaías fez diante da pressão para suavizar a mensagem ao rei Acabe?",
+   "o": [
+    "Recusou-se a falar até que o rei Josafá deixasse o lugar",
+    "Transmitiu exatamente o que o Senhor lhe revelou, mesmo sozinho",
+    "Repetiu o que os 400 profetas diziam, para evitar problemas",
+    "Pediu ao rei que consultasse um sacerdote em seu lugar"
+   ],
+   "a": 1,
+   "e": "No estudo de segunda, Micaías resistiu à maioria e falou só o que Deus ordenou (1Rs 22:13, 14)."
+  },
+  {
+   "h": "Terça · Funções dos profetas",
+   "q": "Qual NÃO era uma função dos profetas, segundo o estudo de terça?",
+   "o": [
+    "Instruir o povo e, às vezes, escrever e preservar as mensagens",
+    "Repreender sacerdotes corruptos, como a família de Eli",
+    "Governar o povo no lugar dos reis infiéis",
+    "Chamar os reis infiéis de volta à obediência à lei de Deus"
+   ],
+   "a": 2,
+   "e": "O estudo de terça mostra profetas aconselhando, repreendendo e instruindo, mas não governando no lugar dos reis."
+  },
+  {
+   "h": "Quarta · Profetisas",
+   "q": "Que profetisa foi consultada pelos conselheiros do rei Josias depois que ele ouviu a leitura do Livro da Lei?",
+   "o": [
+    "Miriã",
+    "Hulda",
+    "Ana",
+    "Débora"
+   ],
+   "a": 1,
+   "e": "O estudo de quarta conta que Josias rasgou as vestes e enviou mensageiros a Hulda, que trouxe a mensagem de Deus sobre o juízo."
+  },
+  {
+   "h": "Quinta · Falsos profetas",
+   "q": "Segundo o estudo, os falsos profetas costumam seguir o caminho do que é popular, como os 400 profetas diante de Acabe.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 0,
+   "e": "O estudo de quinta mostra os 400 “profetas” aconselhando a uma só voz o que agradava ao rei (1Rs 22)."
+  },
+  {
+   "h": "Sexta · Imperfeita, mas disposta",
+   "q": "Que princípio o estudo de sexta tira da hesitação de Ellen White em aceitar o chamado profético?",
+   "o": [
+    "Deus chama apenas quem aceita o chamado de imediato",
+    "Deus escolhe quem já tem influência sobre os líderes da igreja",
+    "Deus chama apenas quem tem saúde forte e muita autoconfiança",
+    "Deus escolhe pessoas imperfeitas, mas dispostas a servi-Lo"
+   ],
+   "a": 3,
+   "e": "O estudo de sexta mostra Ellen com 17 anos, doente e receosa, que se rendeu depois de muita oração."
+  }
+ ],
+ "2026-04-04": [
+  {
+   "h": "Sábado · Profetas do Novo Testamento",
+   "q": "Na ilustração do pai e do filho com os carros, o que o \"motor que continuava o mesmo\" representa na inspiração dos profetas?",
+   "o": [
+    "A pessoa de Moisés, modelo de todos os profetas",
+    "O cânon bíblico, que nunca recebeu acréscimos",
+    "A igreja, que mantém a tradição profética viva",
+    "O Espírito Santo, fonte da inspiração em ambos os Testamentos"
+   ],
+   "a": 3,
+   "e": "No estudo de sábado, o Espírito Santo é o \"motor\" que permanece o mesmo, garantindo continuidade entre os profetas do AT e do NT."
+  },
+  {
+   "h": "Domingo · Jesus como Profeta",
+   "q": "Qual profeta Moisés anunciou, ao dizer que Deus levantaria do meio dos irmãos \"um profeta semelhante a mim\" (Dt 18:15)?",
+   "o": [
+    "João Batista, o precursor do Messias",
+    "Paulo, apóstolo dos gentios",
+    "Jesus Cristo, o Messias",
+    "Elias, que viria antes do dia do Senhor"
+   ],
+   "a": 2,
+   "e": "O estudo de domingo cita Atos 3:22 e João 6:14 para mostrar que essa profecia apontava para Jesus."
+  },
+  {
+   "h": "Segunda · Apóstolos e profetas",
+   "q": "Segundo o estudo de segunda, todos os profetas do Novo Testamento também eram apóstolos.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "O estudo de segunda afirma que nem todos os profetas eram apóstolos (At 15:32), embora ambos recebessem revelação de Deus."
+  },
+  {
+   "h": "Terça · Funções dos profetas do Novo Testamento",
+   "q": "Qual das alternativas NÃO está de acordo com o estudo sobre as funções dos profetas do Novo Testamento?",
+   "o": [
+    "Encorajavam e fortaleciam os irmãos, como Judas e Silas",
+    "Só escreviam livros que passavam a fazer parte da Bíblia",
+    "Ajudavam a preparar os santos para a obra do ministério",
+    "Edificavam, exortavam e consolavam as pessoas"
+   ],
+   "a": 1,
+   "e": "No estudo de terça, Judas e Silas são profetas que não escreveram livros da Bíblia; suas funções eram edificar, exortar e consolar."
+  },
+  {
+   "h": "Quarta · Profetisas e jovens pastores",
+   "q": "Quem é a primeira pessoa chamada de profetisa no Novo Testamento?",
+   "o": [
+    "Priscila, que ensinou Apolo em Éfeso",
+    "Maria, mãe de Jesus, que cantou o Magnificat",
+    "Ana, que adorava noite e dia com jejuns e orações",
+    "Uma das quatro filhas de Filipe, em Cesareia"
+   ],
+   "a": 2,
+   "e": "O estudo de quarta diz que Ana (Lc 2:36-38) é a primeira profetisa do NT; as filhas de Filipe vêm depois (At 21:9)."
+  },
+  {
+   "h": "Quinta · Falsos profetas no Novo Testamento",
+   "q": "Alguém apresenta grandes sinais e prodígios como prova de que sua mensagem vem de Deus. Como o estudo orienta a reagir?",
+   "o": [
+    "Aceitar, pois milagres sempre vêm de Deus",
+    "Examinar pelos frutos e pela Palavra, pois sinais sozinhos não provam nada",
+    "Ignorar qualquer manifestação sobrenatural sem analisar",
+    "Confiar na opinião da maioria dos presentes"
+   ],
+   "a": 1,
+   "e": "O estudo de quinta lembra que eventos sobrenaturais por si sós não provam que Deus age; \"pelos seus frutos os conhecerão\" (Mt 7:16)."
+  },
+  {
+   "h": "Sexta · Mantendo Jesus e Sua Palavra no centro",
+   "q": "Ellen White chamou seus escritos de \"luz menor\". Para qual \"luz maior\" ela queria guiar as pessoas?",
+   "o": [
+    "A Bíblia, regra de fé e prática",
+    "O Desejado de Todas as Nações",
+    "A tradição da igreja ao longo dos séculos",
+    "As visões dos pioneiros adventistas"
+   ],
+   "a": 0,
+   "e": "O estudo de sexta mostra que Ellen apontava os leitores para a Bíblia, mantendo Jesus e Sua Palavra no centro."
+  }
+ ],
+ "2026-04-05": [
+  {
+   "h": "Sábado · Revelação e inspiração",
+   "q": "Segundo o estudo, em qual ilha o apóstolo João foi exilado e recebeu as mensagens proféticas do Apocalipse?",
+   "o": [
+    "Creta, no mar Egeu, durante a perseguição de Trajano",
+    "Patmos, no mar Egeu, durante a perseguição de Domiciano",
+    "Chipre, no Mediterrâneo, durante a perseguição de Nero",
+    "Malta, no Mediterrâneo, durante a perseguição de Domiciano"
+   ],
+   "a": 1,
+   "e": "No estudo de sábado, João foi exilado em Patmos e a mensagem chegou a ele por Deus, Jesus, o anjo e então aos leitores."
+  },
+  {
+   "h": "Domingo · Revelação geral e especial",
+   "q": "Por que a natureza, sozinha, não basta para conhecermos plenamente a Deus e o Seu plano?",
+   "o": [
+    "Ela só mostra o poder de Deus, sem revelar nada sobre o Seu amor",
+    "Ela foi totalmente destruída pelo pecado e não revela mais nada",
+    "Ela só pode ser entendida por quem estuda as ciências naturais",
+    "Ela revela o poder e o amor de Deus, mas também a presença do mal, e sua mensagem é ambígua"
+   ],
+   "a": 3,
+   "e": "O estudo de domingo diz que a mensagem ambígua da natureza só é compreendida à luz da revelação especial, em Jesus e na Bíblia."
+  },
+  {
+   "h": "Segunda · O processo de inspiração",
+   "q": "Segundo o estudo de segunda, os profetas receberam apenas impressões subjetivas, e não mensagens objetivas da verdade a ser transmitida.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "No estudo de segunda, os profetas receberam mensagens objetivas e não deviam distorcê-las, embora usassem suas próprias palavras."
+  },
+  {
+   "h": "Terça · Mensagens orais",
+   "q": "Qual das alternativas NÃO está de acordo com o estudo sobre as mensagens orais dos profetas?",
+   "o": [
+    "Natã, Elias, Eliseu e João Batista não deixaram livros bíblicos",
+    "Noé escreveu parte da Bíblia ao pregar a justiça aos seus contemporâneos",
+    "Noé pregou oralmente, e sua mensagem não era menos inspirada",
+    "Jesus ensinava oralmente com autoridade, sem escrever livros bíblicos"
+   ],
+   "a": 1,
+   "e": "No estudo de terça, Noé foi \"pregador da justiça\" e não escreveu nenhuma parte da Bíblia; sua pregação oral era igualmente inspirada."
+  },
+  {
+   "h": "Quarta · Mensagens escritas",
+   "q": "Quem, segundo o estudo, escreveu os cinco primeiros livros da Bíblia, além do livro de Jó e do Salmo 90?",
+   "o": [
+    "Josué, sucessor de Moisés na liderança de Israel",
+    "Davi, o rei e salmista de Israel",
+    "Samuel, o último dos juízes de Israel",
+    "Moisés, instruído por Deus a escrever \"para memória num livro\""
+   ],
+   "a": 3,
+   "e": "O estudo de quarta cita Êxodo 17:14 e afirma que Moisés escreveu o Pentateuco, Jó e o Salmo 90."
+  },
+  {
+   "h": "Quinta · Dramatização, símbolos e parábolas",
+   "q": "Qual mensagem Deus dramatizou ordenando que Oseias se casasse com Gômer, uma prostituta?",
+   "o": [
+    "O cativeiro dos 390 dias do reino de Israel",
+    "A infidelidade espiritual de Israel em relação ao Senhor",
+    "A promessa de restauração do templo de Salomão",
+    "A queda de Jerusalém diante de um exército estrangeiro"
+   ],
+   "a": 1,
+   "e": "O estudo de quinta diz que o casamento de Oseias (Os 1:2-9) simbolizava a infidelidade espiritual de Israel."
+  },
+  {
+   "h": "Sexta · Ellen White sobre revelação e inspiração",
+   "q": "Segundo Ellen White, em que consiste a inspiração, conforme o estudo de sexta?",
+   "o": [
+    "Ela atua apenas nas visões, nunca nas cartas e diários pessoais",
+    "Ela atua somente nos textos bíblicos, nunca nos escritos dos profetas",
+    "Ela atua palavra por palavra, ditada pelo Espírito ao escritor",
+    "Ela atua nos homens, que sob o Espírito Santo expressam pensamentos divinos com suas palavras"
+   ],
+   "a": 3,
+   "e": "No estudo de sexta, Ellen afirmou que a inspiração atua no próprio indivíduo e não nas expressões, unindo o divino e o humano."
+  }
+ ],
+ "2026-04-06": [
+  {
+   "h": "Sábado · Os escritos proféticos",
+   "q": "Quais são as três formas principais pelas quais, segundo o estudo, os profetas comunicaram as mensagens de Deus?",
+   "o": [
+    "Por anjos, por tábuas de pedra e por parábolas",
+    "Por visões, por rolos e por sacrifícios",
+    "Oralmente, por escrito e por ações simbólicas ou dramatizações",
+    "Por sonhos, por cânticos e por cartas"
+   ],
+   "a": 2,
+   "e": "No estudo de sábado, as três formas são a oral, a escrita e a dramatizada; a semana se concentra nos escritos do cânon."
+  },
+  {
+   "h": "Domingo · O chamado para escrever",
+   "q": "Qual é a primeira menção à escrita na Bíblia, segundo o estudo, a respeito de uma ordem de Deus?",
+   "o": [
+    "Deus mandou Jeremias escrever num rolo as mensagens contra Judá",
+    "Deus mandou Josué registrar a divisão da terra de Canaã",
+    "Deus mandou Moisés registrar num livro a vitória sobre os amalequitas",
+    "Deus mandou Moisés gravar os Dez Mandamentos em tábuas de pedra"
+   ],
+   "a": 2,
+   "e": "O estudo de domingo indica Êxodo 17:14 como a primeira instrução divina para registrar em um livro o que Deus havia falado."
+  },
+  {
+   "h": "Segunda · Gêneros e estilos literários",
+   "q": "Segundo o estudo de segunda, as cartas de Paulo tinham menos autoridade que os escritos dos antigos profetas por serem um estilo diferente de comunicação.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "No estudo de segunda, não há distinção de autoridade entre os estilos; as cartas de Paulo deviam ser recebidas com o mesmo peso dos profetas."
+  },
+  {
+   "h": "Terça · Assistentes literários",
+   "q": "Quem foi o amanuense (secretário) que escreveu a carta aos Romanos, ditada por Paulo?",
+   "o": [
+    "Baruque, escriba que registrou as profecias de Jeremias",
+    "Silas, companheiro de Paulo nas viagens missionárias",
+    "Timóteo, jovem pastor chamado de filho na fé",
+    "Tércio, que declarou: \"Escrevi esta carta\""
+   ],
+   "a": 3,
+   "e": "O estudo de terça cita Romanos 16:22: Tércio apenas registrou o que Paulo desejava comunicar, sendo seu assistente literário."
+  },
+  {
+   "h": "Quarta · Fontes literárias",
+   "q": "Um colega diz que a Bíblia perde a autoridade porque Judas e Paulo citaram textos e filósofos não bíblicos. O que o estudo ensina?",
+   "o": [
+    "Os escritores inspirados podiam usar outras fontes, mas o Espírito os guiava na seleção do que incluir",
+    "Eles tinham de reproduzir tudo palavra por palavra, sem usar outras fontes",
+    "Trechos de outras fontes são menos inspirados do que o restante",
+    "Esses textos foram acrescentados por copistas, e não pelos autores"
+   ],
+   "a": 0,
+   "e": "O estudo de quarta mostra Lucas, Esdras, Neemias e Judas usando fontes, e o Espírito Santo guiando a seleção do material."
+  },
+  {
+   "h": "Quinta · Mensagem divina e imperfeições humanas",
+   "q": "Qual das alternativas NÃO está de acordo com o estudo sobre a mensagem divina e as imperfeições humanas?",
+   "o": [
+    "Deus preservou os mensageiros de falhas, e por isso seus escritos não têm limitações",
+    "Dificuldades não resolvidas não afetam a essência da mensagem apresentada",
+    "O tesouro de Deus foi confiado a \"vasos de barro\", seres humanos frágeis",
+    "Aparentes discrepâncias podem vir de erros de copistas ou de diferenças de fontes"
+   ],
+   "a": 0,
+   "e": "No estudo de quinta, os mensageiros não foram preservados de falhas, e seus escritos refletem as limitações da linguagem humana."
+  },
+  {
+   "h": "Sexta · Os escritos de Ellen White",
+   "q": "O que Ellen White declarou sobre infalibilidade, conforme o estudo de sexta?",
+   "o": [
+    "Nunca a pretendeu, pois unicamente Deus é infalível",
+    "Que seus escritos eram infalíveis por serem dados pelo anjo",
+    "Que seus assistentes literários garantiam a infalibilidade do texto",
+    "Que só seus escritos sobre a vida de Cristo eram infalíveis"
+   ],
+   "a": 0,
+   "e": "O estudo de sexta cita sua declaração: \"Com relação à infalibilidade, nunca a pretendi. Unicamente Deus é infalível.\""
+  }
+ ],
+ "2026-04-07": [
+  {
+   "h": "Sábado · Agora, ouçam isto!",
+   "q": "Segundo 1Coríntios 10:11, com que finalidade as experiências do antigo Israel foram escritas?",
+   "o": [
+    "Como prova de que Deus escolhe apenas um povo para sempre",
+    "Como mero registro histórico, sem aplicação à igreja de hoje",
+    "Como garantia de que ninguém cairá se confiar em si mesmo",
+    "Como advertência a nós, para quem o fim dos tempos tem chegado"
+   ],
+   "a": 3,
+   "e": "Veja o estudo de sábado: os relatos foram escritos como advertência para nós (1Co 10:11)."
+  },
+  {
+   "h": "Domingo · Ira contra o mensageiro de Deus",
+   "q": "Quando o povo se revoltou contra Moisés e Arão, contra quem estava, na verdade, irado?",
+   "o": [
+    "Contra os povos da terra, que os ameaçavam",
+    "Contra Deus, porque não confiava Nele",
+    "Contra os espias, por terem exagerado o relatório",
+    "Contra Calebe, por incentivar a conquista da terra"
+   ],
+   "a": 1,
+   "e": "O estudo de domingo diz que os israelitas estavam irados contra Deus, pois não confiavam Nele."
+  },
+  {
+   "h": "Segunda · Destruindo a mensagem – parte 1",
+   "q": "O que o rei Jeoaquim fez com o rolo que registrava o apelo final de Deus por meio de Jeremias?",
+   "o": [
+    "Guardou o rolo no templo para consultá-lo depois",
+    "Devolveu o rolo a Jeremias pedindo uma nova versão",
+    "Cortou o rolo e o queimou, desprezando a mensagem",
+    "Mandou copiá-lo e lê-lo diante de todo o povo"
+   ],
+   "a": 2,
+   "e": "No estudo de segunda, Jeoaquim reagiu com total desprezo por Deus, por Sua mensagem e Seu mensageiro."
+  },
+  {
+   "h": "Terça · Destruindo a mensagem – parte 2",
+   "q": "Verdadeiro ou falso? Na fase final da história de Judá, a graça oferecida por meio de Jeremias foi recebida com zombaria, desprezo e escárnio.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 0,
+   "e": "O estudo de terça afirma que a mensagem não foi recebida com humildade, fé e arrependimento, mas com zombaria e desprezo."
+  },
+  {
+   "h": "Quarta · Hipocrisia",
+   "q": "Qual alternativa NÃO está de acordo com o estudo sobre a hipocrisia dos fariseus?",
+   "o": [
+    "Diziam uma coisa e faziam outra, mesmo com os apelos de Jesus",
+    "Embelezavam os túmulos dos profetas, mas recusavam a mensagem deles",
+    "Julgavam que jamais teriam matado os profetas, mas tramavam contra o Messias",
+    "Eles se arrependiam ao ouvir os profetas, mas não honravam seus túmulos"
+   ],
+   "a": 3,
+   "e": "Segundo o estudo de quarta, eles honravam os túmulos, mas se recusavam a se arrepender."
+  },
+  {
+   "h": "Quinta · Para nossa advertência",
+   "q": "Segundo 1Coríntios 10, qual é a melhor aplicação dos relatos bíblicos de rebelião para quem os lê hoje?",
+   "o": [
+    "Aprender com eles e levar a sério as advertências, para não repetir os mesmos erros",
+    "Julgar os personagens antigos, certos de que nunca agiríamos como eles",
+    "Medir a vida espiritual pelos bens materiais e pelo conforto que temos",
+    "Concluir que o passado é irrelevante, pois vivemos em outra época"
+   ],
+   "a": 0,
+   "e": "O estudo de quinta explica que os relatos foram preservados para que não repitamos os erros das gerações anteriores."
+  },
+  {
+   "h": "Sexta · Recebendo e transmitindo mensagens",
+   "q": "Como a atitude de Ellen White ao transmitir mensagens desagradáveis se parece com a dos profetas bíblicos?",
+   "o": [
+    "Ao contrário deles, escolhia esse trabalho por conta própria",
+    "Como eles, transmitia a mensagem fielmente, quer os homens ouvissem ou não",
+    "Como eles, buscava a aprovação e o louvor dos homens",
+    "Como eles, só falava quando o povo estava disposto a ouvir"
+   ],
+   "a": 1,
+   "e": "No estudo de sexta, ela diz que advertiria e reprovaria conforme o Espírito ordena, ouçam ou não."
+  }
+ ],
+ "2026-04-08": [
+  {
+   "h": "Sábado · Interpretando os escritos proféticos",
+   "q": "Segundo Lucas 24:27, o que Jesus fez, começando por Moisés e todos os Profetas, diante dos discípulos entristecidos?",
+   "o": [
+    "Substituiu os ensinos do Antigo Testamento por ensinos novos",
+    "Explicou o que constava a respeito Dele em todas as Escrituras",
+    "Revelou que o Messias viria para libertar Israel do domínio romano",
+    "Mostrou que os Profetas só se referiam ao povo de seu tempo"
+   ],
+   "a": 1,
+   "e": "Veja o estudo de sábado: Jesus corrigiu o mal-entendido explicando as Escrituras de forma ampla (Lc 24:27)."
+  },
+  {
+   "h": "Domingo · A Bíblia interpreta a si mesma",
+   "q": "Segundo o estudo, como Jesus tratou os ensinos do Antigo Testamento em Mateus 5:17-48?",
+   "o": [
+    "Limitou a obediência ao comportamento externo das pessoas",
+    "Substituiu os ensinos antigos por ensinamentos totalmente novos",
+    "Revelou as dimensões mais profundas e espirituais do que já era ensinado",
+    "Restringiu os ensinos ao antigo Israel, sem aplicação à igreja"
+   ],
+   "a": 2,
+   "e": "O estudo de domingo diz que Jesus aprofundava o ensino do Antigo Testamento, sem substituí-lo."
+  },
+  {
+   "h": "Segunda · Contexto histórico-cultural",
+   "q": "Em culturas em que o beijo é inadequado, como aplicar o princípio do cumprimento em 1Coríntios 16:20?",
+   "o": [
+    "Abandonando a saudação, por ser costume de uma cultura antiga",
+    "Trocando o acolhimento por formalidade, para evitar constrangimentos",
+    "Mantendo o princípio de acolher com carinho, por meio de um gesto apropriado à cultura",
+    "Exigindo o beijo literal em todas as culturas, para obedecer ao texto"
+   ],
+   "a": 2,
+   "e": "No estudo de segunda, um aperto de mão ou abraço pode expressar o mesmo princípio de acolhimento."
+  },
+  {
+   "h": "Terça · Contexto literário",
+   "q": "Qual alternativa NÃO descreve como Satanás usou a Palavra de Deus fora de contexto?",
+   "o": [
+    "No deserto, citou de modo distorcido o Salmo 91:11 e 12 a Jesus",
+    "No deserto, deu a entender que Deus protegeria quem se colocasse em perigo",
+    "No Éden, apresentou as palavras de Deus em seu contexto original, sem generalizar",
+    "No Éden, generalizou as palavras de Deus e depois deu sua interpretação enganosa"
+   ],
+   "a": 2,
+   "e": "O estudo de terça mostra que, no Éden, Satanás arrancou as palavras de Deus de seu contexto."
+  },
+  {
+   "h": "Quarta · O significado do texto",
+   "q": "Ao comparar Mateus 5:43-48 com Lucas 6:36, o que significa o termo “perfeitos”?",
+   "o": [
+    "Cumprir todos os rituais da lei com absoluta exatidão",
+    "Nunca cometer nenhum erro, em nenhuma situação da vida",
+    "Ser maduros e completos em amor e misericórdia, como o Pai",
+    "Evitar qualquer contato com pessoas consideradas pecadoras"
+   ],
+   "a": 2,
+   "e": "No estudo de quarta, o texto paralelo de Lucas esclarece que “perfeitos” se refere ao amor e à misericórdia do Pai."
+  },
+  {
+   "h": "Quinta · Exposição bíblica",
+   "q": "Verdadeiro ou falso? O eunuco etíope compreendeu a profecia do Servo Sofredor apenas lendo o rolo de Isaías, sem precisar de ajuda.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "O estudo de quinta mostra que ele não entendia a profecia e pediu ajuda; Filipe a explicou."
+  },
+  {
+   "h": "Sexta · Como devemos ler Ellen White?",
+   "q": "Qual princípio Ellen White quis destacar ao condenar a compra de bicicletas, em 1894, aos membros de Battle Creek?",
+   "o": [
+    "O perigo dos exercícios físicos para a saúde",
+    "A proibição de qualquer meio de transporte moderno",
+    "O uso responsável dos recursos que Deus nos confia, como o dinheiro",
+    "A necessidade de evitar tudo que seja novidade"
+   ],
+   "a": 2,
+   "e": "No estudo de sexta, as bicicletas eram artigos muito caros; o ponto central era a responsabilidade com os recursos."
+  }
+ ],
+ "2026-04-09": [
+  {
+   "h": "Sábado · Testando os profetas",
+   "q": "Segundo 1João 4:1, o que devemos fazer com todo espírito que afirma falar da parte de Deus?",
+   "o": [
+    "Confiar neles quando a mensagem agrada à maioria",
+    "Aceitar todo aquele que realiza sinais sobrenaturais",
+    "Evitar todos eles, pois toda manifestação é suspeita",
+    "Provar os espíritos, para ver se procedem de Deus"
+   ],
+   "a": 3,
+   "e": "Veja o estudo de sábado: assim como um diamante, a alegação profética precisa ser posta à prova."
+  },
+  {
+   "h": "Domingo · O papel do sobrenatural",
+   "q": "Verdadeiro ou falso? Fenômenos sobrenaturais, por si sós, comprovam que uma pessoa é profeta de Deus.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "O estudo de domingo ensina que Satanás também produz manifestações sobrenaturais; todos os testes bíblicos são necessários."
+  },
+  {
+   "h": "Segunda · Harmonia com a Bíblia",
+   "q": "Segundo o estudo, o que um verdadeiro profeta jamais faz em relação à verdade bíblica?",
+   "o": [
+    "Contradizer, reduzir ou desviar a atenção da verdade bíblica",
+    "Revelar a verdade de forma progressiva, sem conflito com a anterior",
+    "Aprofundar o entendimento do plano de Deus em sua geração",
+    "Retomar escritos proféticos anteriores como padrão do ministério"
+   ],
+   "a": 0,
+   "e": "No estudo de segunda, a Bíblia é o padrão final e novas revelações nunca contradizem as anteriores."
+  },
+  {
+   "h": "Terça · A encarnação de Cristo",
+   "q": "Além de reconhecer Jesus como pessoa real, o que o teste de 1João 4:1-3 exige do profeta?",
+   "o": [
+    "Admitir Sua humanidade, deixando de lado Sua divindade",
+    "Citar Jesus como um detalhe a mais na mensagem",
+    "Aceitar apenas que Ele viveu e ensinou na Terra",
+    "Crer que Ele é Deus encarnado e aceitar toda a verdade bíblica sobre Cristo"
+   ],
+   "a": 3,
+   "e": "O estudo de terça diz que Jesus precisa ser o centro dos ensinos do profeta, Deus encarnado e verdadeiramente humano."
+  },
+  {
+   "h": "Quarta · Frutos positivos",
+   "q": "Qual alternativa NÃO está de acordo com o estudo sobre os frutos de um profeta?",
+   "o": [
+    "Um verdadeiro profeta é isento de pecado e infalível em nível pessoal",
+    "A qualidade do fruto só pode ser avaliada ao longo do tempo",
+    "O profeta não pode desmentir a mensagem com um estilo de vida oposto",
+    "Jonas, Paulo e Pedro mostram que profetas também têm falhas"
+   ],
+   "a": 0,
+   "e": "No estudo de quarta, ser profeta não torna ninguém isento de pecado nem infalível; só Deus é perfeito."
+  },
+  {
+   "h": "Quinta · Profecias cumpridas",
+   "q": "Por que a destruição de Nínive anunciada por Jonas não aconteceu exatamente como declarado?",
+   "o": [
+    "Porque Jonas anunciou um prazo diferente do dito por Deus",
+    "Porque a profecia era condicional e o povo creu na mensagem e mudou de rumo",
+    "Porque Deus mudou de ideia sem que o povo se arrependesse",
+    "Porque Jonas era um falso profeta e errou a previsão"
+   ],
+   "a": 1,
+   "e": "O estudo de quinta explica que, com o arrependimento dos ninivitas, Deus não os destruiu naquele momento."
+  },
+  {
+   "h": "Sexta · “Provem e vejam”",
+   "q": "Para avaliar o dom de Ellen White, qual é o melhor passo prático sugerido pelo estudo?",
+   "o": [
+    "Julgá-lo apenas pelas críticas feitas no passado",
+    "Esperar que sinais sobrenaturais confirmem cada afirmação",
+    "Ler os escritos dela, começando por Caminho a Cristo",
+    "Ler apenas frases isoladas, sem considerar o contexto"
+   ],
+   "a": 2,
+   "e": "No estudo de sexta, a experiência pessoal com seus escritos é uma das evidências mais fortes (Sl 34:8)."
+  }
+ ],
+ "2026-04-10": [
+  {
+   "h": "Sábado · Autoridade e relevância proféticas",
+   "q": "Segundo Hebreus 4:12, versículo para memorizar da semana, o que a Palavra de Deus é capaz de fazer?",
+   "o": [
+    "Registrar os fatos da história sem alcançar a alma, o espírito ou a vontade",
+    "Aquietar o coração sem confrontar os pensamentos nem as intenções de quem a lê",
+    "Penetrar até dividir alma e espírito e julgar os pensamentos e propósitos do coração",
+    "Agradar a quem a ouve, evitando cortar ou dividir o que há no interior da pessoa"
+   ],
+   "a": 2,
+   "e": "O verso de sábado diz que a Palavra é viva, eficaz, mais cortante que espada de dois gumes e apta para julgar o coração."
+  },
+  {
+   "h": "Domingo · Porta-vozes da autoridade de Deus",
+   "q": "Por que Moisés precisou passar 40 anos como pastor no deserto antes de ser porta-voz de Deus?",
+   "o": [
+    "Para escrever os primeiros livros da Bíblia longe das distrações do palácio",
+    "Para aprender técnicas de oratória que lhe faltavam depois da educação no Egito",
+    "Para desaprender o que aprendeu como príncipe e conhecer profundamente o Deus em cujo nome falaria",
+    "Para reunir um exército de pastores que o ajudaria a libertar Israel do Egito"
+   ],
+   "a": 2,
+   "e": "O estudo de domingo mostra que a educação egípcia não bastava: Moisés precisava conhecer a fundo o Deus de quem seria porta-voz."
+  },
+  {
+   "h": "Segunda · A autoridade de Cristo",
+   "q": "Verdadeiro ou falso: quando os sacerdotes perguntaram quem Lhe dera autoridade, Jesus respondeu diretamente, sem fazer nenhuma pergunta.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "O estudo de segunda conta que Jesus os interrogou sobre a autoridade de João Batista; como se recusaram a responder, rejeitaram também a autoridade Dele."
+  },
+  {
+   "h": "Terça · Autoridade bíblica",
+   "q": "Qual afirmação NÃO está de acordo com o estudo de terça sobre a autoridade bíblica?",
+   "o": [
+    "Só rejeita a Bíblia quem chega ao extremo de queimá-la, como fez o rei Jeoaquim",
+    "Muitos rejeitam a Palavra porque não gostam das exigências que ela faz sobre a sua vida",
+    "A Bíblia é a regra de fé e prática do cristão e o padrão máximo da verdade",
+    "Ignorar a Bíblia, sem separar tempo para lê-la e aplicá-la, é uma forma comum de rejeitá-la"
+   ],
+   "a": 0,
+   "e": "No estudo de terça, o texto diz que não é preciso queimar a Bíblia para rejeitá-la: ignorá-la, mesmo afirmando crer nela, pode ser igualmente grave."
+  },
+  {
+   "h": "Quarta · Autoridade organizacional",
+   "q": "Em tempos de guerra e crise, como os profetas, entre eles Jaaziel e Débora, serviram ao povo de Deus?",
+   "o": [
+    "Apenas repreendiam o povo, sem oferecer direção nem esperança",
+    "Assumiram o comando militar no lugar dos reis e dos líderes da nação",
+    "Limitavam-se a instruir sobre as festas, sem tratar de crises nem de governo",
+    "Foram o meio pelo qual o Senhor oferecia direção, ânimo e esperança ao povo e aos líderes"
+   ],
+   "a": 3,
+   "e": "O estudo de quarta mostra que os profetas davam direção, ânimo e esperança, e que nenhuma área da vida em Israel estava fora da orientação de Deus."
+  },
+  {
+   "h": "Quinta · Profetas canônicos e não canônicos",
+   "q": "Davi não questionou a autoridade de Natã, que não escreveu nenhum livro da Bíblia. O que isso mostra?",
+   "o": [
+    "Profetas não canônicos eram menos inspirados, mas ainda podiam repreender um rei",
+    "A autoridade de um profeta depende de seus escritos terem sido aceitos por uma assembleia",
+    "Só os profetas cujos livros entraram na Bíblia têm autoridade para repreender reis",
+    "A autoridade dos escritos proféticos vem da inspiração divina, e não de estarem no cânon"
+   ],
+   "a": 3,
+   "e": "No estudo de quinta, Natã confrontou Davi após o adultério e o assassinato, e a autoridade dele vinha da inspiração de Deus."
+  },
+  {
+   "h": "Sexta · Falando com autoridade",
+   "q": "Um amigo pergunta se os escritos de Ellen White substituem a Bíblia. Qual resposta reflete o estudo de sexta?",
+   "o": [
+    "Não: são só ideias pessoais dela, sem autoridade nem relevância para o tempo do fim",
+    "Não: têm relevância e autoridade, mas não são acréscimo à Bíblia nem estão no mesmo nível dela",
+    "Sim: a Bíblia está ultrapassada e os escritos dela a substituem em temas modernos",
+    "Sim: por serem inspirados, ocupam o mesmo nível da Bíblia e a completam como doutrina"
+   ],
+   "a": 1,
+   "e": "O estudo de sexta explica que Ellen White é profeta pós-bíblica e não canônica: seus escritos são relevantes e carregam autoridade, mas não são acréscimo à Bíblia."
+  }
+ ],
+ "2026-04-11": [
+  {
+   "h": "Sábado · Manifestação profética em momentos decisivos",
+   "q": "Segundo Amós 3:7, o que o Senhor Deus faz antes de realizar alguma coisa?",
+   "o": [
+    "Espera o povo se arrepender para só então anunciar o juízo",
+    "Revela o Seu segredo aos Seus servos, os profetas",
+    "Envia anjos para executar sozinhos o que decidiu fazer",
+    "Guarda silêncio para provar a fidelidade do Seu povo"
+   ],
+   "a": 1,
+   "e": "O verso de sábado diz que Deus não faz coisa alguma sem antes revelar Seu segredo aos profetas; por isso comunica de antemão o que pretende fazer."
+  },
+  {
+   "h": "Domingo · Advertência de desastre",
+   "q": "Segundo Ellen White no estudo de domingo, quantos anos antes do dilúvio o Senhor declarou a Noé Seu propósito e ordenou a arca?",
+   "o": [
+    "Cento e vinte anos",
+    "Setenta anos",
+    "Duzentos anos",
+    "Quarenta anos"
+   ],
+   "a": 0,
+   "e": "A citação de Patriarcas e Profetas no estudo de domingo diz que foram cento e vinte anos antes do dilúvio, por meio de um santo anjo."
+  },
+  {
+   "h": "Segunda · Uma mãe em Israel",
+   "q": "Segundo o estudo, qual é a principal mensagem da história de Débora e Baraque?",
+   "o": [
+    "A habilidade militar de Baraque foi o que garantiu a vitória sobre Sísera",
+    "Os líderes levaram o povo a dar glória a Deus pela vitória, o que revela a verdadeira liderança espiritual",
+    "Uma juíza deve sempre assumir o comando do exército para liderar o povo",
+    "A fraqueza dos israelitas mostrava que era impossível vencer sem mais soldados"
+   ],
+   "a": 1,
+   "e": "No estudo de segunda, a habilidade de Baraque foi importante, mas não garantiu a vitória; o essencial foi conduzir a comunidade a glorificar a Deus."
+  },
+  {
+   "h": "Terça · Chamado ao arrependimento",
+   "q": "Verdadeiro ou falso: ao reencontrar Elias, o rei Acabe se arrependeu e reconheceu que a seca vinha do pecado de Israel.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "No estudo de terça, Acabe tentou matar Elias e, quando o encontrou, ainda o culpou pela falta de chuva (1Rs 18:17)."
+  },
+  {
+   "h": "Quarta · Esperança no exílio",
+   "q": "Qual afirmação NÃO está de acordo com o estudo de quarta sobre o exílio?",
+   "o": [
+    "Deus enviou Israel ao exílio na primeira vez que o povo pecou, sem nenhum aviso antes",
+    "Deus continuou enviando profetas, como Ezequiel e Daniel, para dar esperança no exílio",
+    "Durante séculos, profeta após profeta, Deus tentou afastar o povo de seus pecados",
+    "Israel foi levado cativo pela Assíria, e Judá foi deportado para a Babilônia"
+   ],
+   "a": 0,
+   "e": "O estudo de quarta afirma que Deus não enviou o povo ao exílio na primeira vez que pecou: insistiu com paciência por meio de Seus profetas."
+  },
+  {
+   "h": "Quinta · Um profeta para o tempo de espera",
+   "q": "Com qual profeta o estudo de quinta compara João, autor do Apocalipse, por ser testemunha profética em um momento decisivo?",
+   "o": [
+    "Elias, que desafiou os profetas de Baal no monte",
+    "Noé, pregador da justiça antes do dilúvio",
+    "João Batista, que anunciou a primeira vinda de Jesus Cristo",
+    "Débora, que transmitiu a ordem de avançar a Baraque"
+   ],
+   "a": 2,
+   "e": "O estudo de quinta diz que João nos lembra João Batista, que anunciou a primeira vinda de Cristo em um momento decisivo da história."
+  },
+  {
+   "h": "Sexta · A voz profética",
+   "q": "Qual foi o papel de Ellen White na década de 1880, segundo o estudo de sexta?",
+   "o": [
+    "Incentivar a organização oficial da denominação, fundada em 21 de maio de 1863",
+    "Consolar os crentes desapontados com a primeira visão, após o Grande Desapontamento",
+    "Trazer equilíbrio à teologia da salvação, enfatizando a graça e a justificação pela fé junto à lei",
+    "Impulsionar a reforma de saúde por meio de duas visões, em 1863 e 1865"
+   ],
+   "a": 2,
+   "e": "O estudo de sexta indica que, na década de 1880, ela equilibrou a teologia adventista sobre salvação com a centralidade da graça e da justificação pela fé."
+  }
+ ],
+ "2026-04-12": [
+  {
+   "h": "Sábado · Revelações proféticas no tempo do fim",
+   "q": "Segundo Joel 2:28, 29, sobre quem o Senhor derramaria o Seu Espírito?",
+   "o": [
+    "Exclusivamente sobre os jovens, que teriam visões, e não sobre os velhos",
+    "Apenas sobre os profetas e os juízes de cada geração",
+    "Somente sobre os sacerdotes e os líderes escolhidos do povo de Israel",
+    "Sobre toda a humanidade: filhos e filhas, velhos, jovens, servos e servas"
+   ],
+   "a": 3,
+   "e": "O verso de sábado fala do Espírito derramado sobre toda a humanidade, de filhos e filhas a servos e servas."
+  },
+  {
+   "h": "Domingo · A promessa de Joel",
+   "q": "Por que o estudo conclui que a profecia de Joel 2:28-31 aponta para o tempo do fim?",
+   "o": [
+    "É apocalíptica e traz sinais no Sol e na Lua, os mesmos que Jesus e João ligam à segunda vinda",
+    "É profecia clássica, que usa nomes e números literais de nações da época de Joel",
+    "Fala apenas da primeira vinda de Cristo, quando o Sol escureceu na cruz",
+    "Joel a cumpriu em seu próprio tempo, nos anos logo depois do seu ministério"
+   ],
+   "a": 0,
+   "e": "No estudo de domingo, o texto se enquadra na profecia apocalíptica, e os sinais cósmicos aparecem em Mateus 24 e Apocalipse 6, antes da segunda vinda."
+  },
+  {
+   "h": "Segunda · Pentecostes",
+   "q": "Atos 2 mostra o primeiro cumprimento de Joel. Como o estudo chama essa bênção e qual será o cumprimento final?",
+   "o": [
+    "Chuva serôdia na cruz; o cumprimento final virá com a chuva temporã",
+    "Chuva serôdia no Pentecostes; o cumprimento final virá com a chuva temporã",
+    "Chuva temporã no Pentecostes, sem nenhum cumprimento adicional no futuro",
+    "Chuva temporã no Pentecostes; o cumprimento final virá com a chuva serôdia, pouco antes do fim"
+   ],
+   "a": 3,
+   "e": "O estudo de segunda associa Atos 2 à chuva temporã e o derramamento do Espírito pouco antes do fim à chuva serôdia (Jl 2:23)."
+  },
+  {
+   "h": "Terça · Dons do Espírito",
+   "q": "Qual característica NÃO é apontada pelo estudo de terça sobre os profetas?",
+   "o": [
+    "Deus lhes fala por meio de visões, sonhos ou declarações audíveis",
+    "Alguns contaram com assistentes literários, como Baruque, que ajudou Jeremias",
+    "Eles escolhem a si mesmos e nunca sentem relutância ao assumir essa responsabilidade",
+    "A mensagem deles deve estar em harmonia com a dos profetas anteriores"
+   ],
+   "a": 2,
+   "e": "O estudo de terça diz que os profetas são chamados por Deus e muitas vezes se sentem indignos e relutantes, mas obedecem."
+  },
+  {
+   "h": "Quarta · O remanescente do tempo do fim",
+   "q": "Segundo Apocalipse 12:17, quais são as duas marcas que identificam a igreja do tempo do fim?",
+   "o": [
+    "Pregar o evangelho a todos e ter o dom de falar em línguas",
+    "Guardar os mandamentos de Deus e ter o testemunho de Jesus",
+    "Guardar os mandamentos de Deus e batizar os novos crentes por imersão",
+    "Ter o testemunho de Jesus e celebrar as festas anuais de Israel"
+   ],
+   "a": 1,
+   "e": "O estudo de quarta cita as duas características de Apocalipse 12:17 e identifica o testemunho de Jesus com o espírito de profecia (Ap 19:10)."
+  },
+  {
+   "h": "Quinta · Manifestações atuais",
+   "q": "Verdadeiro ou falso: no Pentecostes, o sermão de Pedro, centrado em Cristo, levou cerca de 300 pessoas ao arrependimento e ao batismo.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "O estudo de quinta diz que a mensagem cristocêntrica de Pedro, com o poder do Espírito Santo, levou 3 mil pessoas ao arrependimento e ao batismo."
+  },
+  {
+   "h": "Sexta · Compromisso com a missão",
+   "q": "Segundo o estudo de sexta, qual é a maneira mais eficaz de tornar Ellen White irrelevante para a geração atual?",
+   "o": [
+    "Impedir a publicação de seus livros em novas traduções",
+    "Alegar que ela escreveu em uma época muito diferente da nossa",
+    "Classificá-la publicamente como falsa profetisa em debates",
+    "Afastar a atual geração da leitura pessoal de seus escritos"
+   ],
+   "a": 3,
+   "e": "O estudo de sexta lista outras estratégias de Satanás, mas diz que a mais eficaz é afastar a atual geração da leitura pessoal dos escritos dela."
+  }
+ ],
+ "2026-04-13": [
+  {
+   "h": "Sábado · Bênçãos da palavra profética",
+   "q": "Segundo 2 Timóteo 3:16, 17, para que serve toda a Escritura inspirada por Deus?",
+   "o": [
+    "Ensino, repreensão, correção e educação na justiça, para o servo de Deus ser habilitado a toda boa obra",
+    "Ensino e repreensão, para que o servo de Deus seja perfeito sem precisar de boas obras",
+    "Correção e profecia, para que o servo de Deus conheça o futuro de cada nação",
+    "Apenas ensino e consolo, deixando a correção para os pastores e os líderes da igreja"
+   ],
+   "a": 0,
+   "e": "O verso de sábado diz que a Escritura é útil para ensinar, repreender, corrigir e educar na justiça, a fim de que o servo de Deus fique habilitado para toda boa obra."
+  },
+  {
+   "h": "Domingo · A profecia exalta Cristo",
+   "q": "O que 1 Coríntios 2:2 revela sobre a grande motivação do ministério de Paulo?",
+   "o": [
+    "Defender com argumentos filosóficos a superioridade do cristianismo",
+    "Viver para conhecer, pregar e se gloriar apenas em Cristo crucificado",
+    "Provar com evidências científicas a existência de Deus",
+    "Organizar igrejas com uma estrutura forte para vencer as divisões"
+   ],
+   "a": 1,
+   "e": "No estudo de domingo, Paulo decidiu não saber nada entre os coríntios, a não ser Jesus Cristo, e este crucificado."
+  },
+  {
+   "h": "Segunda · A profecia reafirma a Bíblia",
+   "q": "No caminho de Emaús, o que Jesus usou para ajudar os dois discípulos desanimados a entender o propósito de Sua missão?",
+   "o": [
+    "Uma visão do Céu que confirmava a Sua ressurreição aos dois",
+    "Milagres de cura realizados diante deles ao longo da caminhada",
+    "As Escrituras do Antigo Testamento, explicando tudo o que diziam a Seu respeito",
+    "Uma explicação filosófica sobre o sofrimento e a justiça de Deus"
+   ],
+   "a": 2,
+   "e": "O estudo de segunda destaca que Jesus exaltou as Escrituras (Lc 24:27) antes de revelar quem Ele era."
+  },
+  {
+   "h": "Terça · A profecia é o detector da verdade divina",
+   "q": "Qual afirmação NÃO está de acordo com o estudo de terça sobre o dom de profecia como detector da verdade?",
+   "o": [
+    "Satanás mistura um pouco de verdade com o erro para levar as pessoas ao seu domínio",
+    "Jesus respondeu às investidas de Satanás com um claro: “Está escrito”",
+    "Paulo previu um tempo em que as pessoas seguiriam mestres que agradassem seus desejos",
+    "Com tantas denominações, é impossível discernir a verdade, pois todas as interpretações podem estar corretas"
+   ],
+   "a": 3,
+   "e": "No estudo de terça, o texto afirma que as interpretações não podem estar todas corretas, pois muitas vezes o que uma igreja ensina conflita com outras."
+  },
+  {
+   "h": "Quarta · A profecia consola o povo de Deus",
+   "q": "Verdadeiro ou falso: em Isaías 40:1-5, Deus disse a Judá que, por precisar puni-lo, o rejeitaria para sempre.",
+   "o": [
+    "Verdadeiro",
+    "Falso"
+   ],
+   "a": 1,
+   "e": "O estudo de quarta explica que Deus queria que Judá soubesse que, embora precisasse puni-lo, não o rejeitaria para sempre, e mandou consolá-lo com ternura."
+  },
+  {
+   "h": "Quinta · A profecia une a igreja em Cristo",
+   "q": "Que tipo de unidade Jesus pediu em Sua oração de João 17, segundo o estudo de quinta?",
+   "o": [
+    "Unidade de pessoas diversas em amor, propósito e ação, e não uma uniformidade sem vida",
+    "Unidade apenas entre os líderes da igreja, sem exigir o mesmo dos membros",
+    "Uniformidade, em que todos tivessem as mesmas origens, etnias e costumes",
+    "Unidade política entre as nações, para que o mundo pudesse crer"
+   ],
+   "a": 0,
+   "e": "O estudo de quinta diz que a unidade pedida por Jesus reúne uma grande diversidade de pessoas, e não uma uniformidade sem vida."
+  },
+  {
+   "h": "Sexta · Experimente de novo",
+   "q": "Que conclusão a pesquisa de Dudley e Cummings Jr. apresentou sobre quem lê regularmente os escritos de Ellen White?",
+   "o": [
+    "Têm relacionamento mais profundo com Cristo, mais certeza da salvação e mais desejo de testemunhar",
+    "Leem menos a Bíblia, pois trocam o estudo pessoal pelos livros dela",
+    "Têm mais conhecimento de história, mas o mesmo desejo de testemunhar que os demais",
+    "Participam mais de seminários, mas praticam menos o culto familiar"
+   ],
+   "a": 0,
+   "e": "O estudo de sexta cita a pesquisa: quem lê regularmente tem relacionamento mais profundo com Cristo, mais certeza da salvação, mais culto familiar e mais desejo de testemunhar."
   }
  ]
 }
