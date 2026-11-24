@@ -16,6 +16,9 @@ on:
       quiz_a_partir_da_licao:
         description: 'Se refazer: a partir de qual lição (1 = todas)'
         default: '1'
+      quiz_semana:
+        description: 'Gerar o quiz só desta lição (número, vazio = a mais urgente)'
+        default: ''
 
 permissions:
   contents: write
@@ -44,15 +47,17 @@ jobs:
           git clone --depth 1 --filter=blob:none --sparse https://github.com/Adventech/sabbath-school-lessons.git /tmp/ss
           git -C /tmp/ss sparse-checkout set src/pt
           python tools/gerar_licao.py /tmp/ss/src/pt auto
-      - name: Quizzes com IA (Groq gpt-oss) — só semanas que ainda não têm quiz
+      - name: Quiz com IA (Groq gpt-oss) — 1 semana por execução (modo leve)
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        timeout-minutes: 35
+        timeout-minutes: 10
         run: |
+          EXTRA=""
+          if [ -n "${{ github.event.inputs.quiz_semana }}" ]; then EXTRA="--semana ${{ github.event.inputs.quiz_semana }}"; fi
           if [ "${{ github.event.inputs.refazer_quiz }}" = "sim" ]; then
-            python -u tools/gerar_quiz.py --refazer --a-partir "${{ github.event.inputs.quiz_a_partir_da_licao || 1 }}"
+            python -u tools/gerar_quiz.py --refazer --a-partir "${{ github.event.inputs.quiz_a_partir_da_licao || 1 }}" $EXTRA
           else
-            python -u tools/gerar_quiz.py
+            python -u tools/gerar_quiz.py $EXTRA
           fi
         continue-on-error: true
       - name: Salvar alterações
