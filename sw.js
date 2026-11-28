@@ -3,7 +3,7 @@
    Os textos das versões (ACF/AA/NVI) e a lição são guardados pela página no Cache Storage
    (caches "ess-biblia-v1" e "ess-licoes-v1"), que este arquivo não toca. */
 
-const SHELL = "ess-shell-v10";
+const SHELL = "ess-shell-v11";
 const ASSETS = [
   "./",
   "./index.html",
@@ -20,12 +20,18 @@ const ASSETS = [
   "./config.js"
 ];
 
+const CORE = ["./", "./index.html", "./manifest.webmanifest", "./config.js"];
+
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(SHELL)
-      .then(cache => Promise.all(ASSETS.map(a => cache.add(a).catch(() => {}))))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(SHELL);
+    // Arquivos essenciais: se falharem (sinal ruim), a instalação é cancelada e o
+    // service worker antigo, que já funciona offline, continua valendo.
+    await Promise.all(CORE.map(a => cache.add(new Request(a, { cache: "reload" }))));
+    // O resto é opcional.
+    await Promise.all(ASSETS.filter(a => !CORE.includes(a)).map(a => cache.add(a).catch(() => {})));
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", event => {
@@ -56,14 +62,19 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // Dados da lição: rede primeiro (para pegar atualizações) e, sem internet, a cópia guardada.
+  // Dados da lição: rede primeiro (para pegar atualizações), mas sem esperar à toa:
+  // se a internet estiver fraca/travada, usa em até 3,5 s a cópia guardada.
   if (url.pathname.includes("/data/") || url.pathname.endsWith("/config.js")) {
-    event.respondWith(
-      fetch(req, { cache: "no-cache" }).then(res => {
+    event.respondWith((async () => {
+      const cached = await caches.match(req);
+      const net = fetch(req, { cache: "no-cache" }).then(res => {
         if (res && res.ok) { const copy = res.clone(); caches.open(SHELL).then(c => c.put(req, copy)); }
         return res;
-      }).catch(() => caches.match(req))
-    );
+      });
+      if (!cached) return net;
+      event.waitUntil(net.catch(() => {}));
+      return Promise.race([net.catch(() => cached), new Promise(r => setTimeout(() => r(cached), 3500))]);
+    })());
     return;
   }
 
@@ -79,8 +90,8 @@ self.addEventListener("fetch", event => {
             }
             return res;
           })
-          .catch(() => cached);
-        return cached || refresh;
+          .catch(() => cached || caches.match("./") );
+        return cached || refresh.then(r => r || caches.match("./"));
       })
     );
     return;

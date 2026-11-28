@@ -227,6 +227,14 @@ let S={read:{},notes:{},fs:18,theme:'',ver:'aa',qz:{},qp:{},name:'',cls:''},W=0,
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=id=>document.getElementById(id);
+/* ===== armazenamento offline: pede "persistente" ao navegador e guarda cópia extra no IndexedDB ===== */
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+const fetchT=(u,ms,o)=>{const ac=new AbortController(),t=setTimeout(()=>ac.abort(),ms);return fetch(u,Object.assign({signal:ac.signal},o||{})).finally(()=>clearTimeout(t))};
+const idb=(()=>{let p;
+  const open=()=>p||(p=new Promise((ok,no)=>{try{const r=indexedDB.open('ess-offline',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)}catch(e){no(e)}}));
+  const tx=(m,f)=>open().then(db=>new Promise((ok,no)=>{const t=db.transaction('kv',m),r=f(t.objectStore('kv'));t.oncomplete=()=>ok(r.result);t.onerror=t.onabort=()=>no(t.error)}));
+  return{get:k=>tx('readonly',s=>s.get(k)).catch(()=>undefined),set:(k,v)=>tx('readwrite',s=>s.put(v,k)).then(()=>true).catch(()=>false),has:k=>tx('readonly',s=>s.count(k)).then(n=>n>0).catch(()=>false)};
+})();
 const pd=s=>{const[a,b,c]=s.split('/');return new Date(+c,b-1,+a)};
 const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
 const inl=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/(^|[\s(])\*([^*\n]+)\*/g,'$1<em>$2</em>').replace(REF,(m,b)=>`<span class="ref" role="button" data-b="${ALIAS[b]}" data-s="${m.slice(b.length).replace(/^\.? ?/,'')}">${m}</span>`);
@@ -332,23 +340,51 @@ document.addEventListener('click',e=>{
 const VERS=[['acf','ACF','Almeida Corrigida Fiel'],['aa','AA','Almeida Revisada Imprensa Bíblica'],['nvi','NVI','Nova Versão Internacional']];
 const VURL=id=>`https://raw.githubusercontent.com/thiagobodruk/biblia/master/json/${id}.json`;
 const LURL='data/licao.json',vd={};let bib=null;
+const parseBible=raw=>{
+  const bs=Array.isArray(raw)?raw:Object.values(raw);
+  const d=bs.map(b=>(b.chapters||[]).map(ch=>(Array.isArray(ch)?ch:(ch.verses||[])).map(v=>typeof v=='string'?v:(v.text||''))));
+  if(d.length<66)throw 0;return d;
+};
 async function loadBible(id,force){
   if(vd[id]&&!force)return vd[id];
-  const url=VURL(id);let c=null;try{c=await caches.open('ess-biblia-v1')}catch(e){}
-  let res=!force&&c?await c.match(url):null;
-  if(!res){res=await fetch(url);if(!res.ok)throw 0;if(c)try{await c.put(url,res.clone())}catch(e){}}
-  const raw=await res.json(),bs=Array.isArray(raw)?raw:Object.values(raw);
-  const d=bs.map(b=>(b.chapters||[]).map(ch=>(Array.isArray(ch)?ch:(ch.verses||[])).map(v=>typeof v=='string'?v:(v.text||''))));
-  if(d.length<66)throw 0;return vd[id]=d;
+  const url=VURL(id),ik='bib:'+id;let c=null,d=null,fromNet=false;try{c=await caches.open('ess-biblia-v1')}catch(e){}
+  if(!force){
+    try{const h=c&&await c.match(url);if(h)d=parseBible(await h.json())}catch(e){}   // 1) Cache Storage
+    if(!d){const s=await idb.get(ik);if(Array.isArray(s)&&s.length>=66)d=s}            // 2) IndexedDB (cópia de segurança)
+  }
+  if(!d){                                                                             // 3) internet (só se não houver cópia)
+    const res=await fetchT(url,90000);if(!res.ok)throw 0;
+    const cp=res.clone();d=parseBible(await res.json());fromNet=true;
+    if(c)try{await c.put(url,cp)}catch(e){}
+  }
+  if(fromNet||force||!(await idb.has(ik)))idb.set(ik,d);                              // mantém as duas cópias sempre completas
+  return vd[id]=d;
 }
 const SK='data/licao-sync.json';
+const saved=async(cn,u,ik)=>(await inCache(cn,u))||(ik?await idb.has(ik):false);
+async function readSaved(c,url,ik){
+  try{const h=c&&await c.match(url);if(h)return await h.json()}catch(e){}
+  return (await idb.get(ik))||null;
+}
 async function loadLesson(){
   let c=null;try{c=await caches.open('ess-licoes-v1')}catch(e){}
-  let a=null,b=null;
-  try{const r=await fetch(LURL,{cache:'no-cache'});if(r.ok){if(c)try{await c.put(LURL,r.clone())}catch(e){}a=await r.json()}}catch(e){}
-  if(!a)try{const h=c&&await c.match(LURL);if(h)a=await h.json()}catch(e){}
-  try{const h=c&&await c.match(SK);if(h)b=await h.json()}catch(e){}
+  // Primeiro o que já está salvo no aparelho (abre na hora, sem esperar a internet).
+  let a=await readSaved(c,LURL,'lesson:main'),b=await readSaved(c,SK,'lesson:sync');
+  if(!a){ // primeira vez: busca na rede
+    try{const r=await fetchT(LURL,15000,{cache:'no-cache'});if(r.ok){const cp=r.clone();a=await r.json();if(c)try{await c.put(LURL,cp)}catch(e){}idb.set('lesson:main',a)}}catch(e){}
+  }
   const d=b&&(!a||b.id>=a.id)?b:a;if(!d)throw 0;return d;
+}
+async function refreshLesson(force){ // em segundo plano: guarda a versão mais nova do arquivo da lição
+  if(!navigator.onLine)return false;
+  try{
+    const r=await fetchT(LURL,15000,{cache:'no-cache'});if(!r.ok)return false;
+    const cp=r.clone(),n=await r.json();if(!n||!n.weeks)return false;
+    try{const c=await caches.open('ess-licoes-v1');await c.put(LURL,cp)}catch(e){}
+    idb.set('lesson:main',n);
+    if(D&&n.id>D.id){adopt(n);VIEW='home';draw();toast('Novo trimestre: '+n.title)}
+    return true;
+  }catch(e){return false}
 }
 function spec2set(s){const set=new Set();s.split(/,| e /).forEach((p,i)=>{p=(i?p:p.replace(/^\d+:/,'')).trim();const m=p.match(/^(\d+)(?:[-–](\d+))?/);if(m)for(let v=+m[1];v<=+(m[2]||m[1]);v++)set.add(v)});return set}
 function openRef(b,s){b=+b;const c=parseInt(s);bib={b,c,vs:spec2set(s),full:false,label:BK[b][1]+' '+s};showBible()}
@@ -373,14 +409,14 @@ const inCache=async(n,u)=>{try{return !!(await(await caches.open(n)).match(u))}c
 async function showOffline(){
   bib=null;if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();
   $('sheet').hidden=false;$('st').textContent='Uso offline';$('sv').innerHTML='';$('sf').innerHTML='';
-  const rows=[['Lição: '+D.title+' · '+D.human,LURL,'ess-licoes-v1','L'],...VERS.map(v=>['Bíblia '+v[1],VURL(v[0]),'ess-biblia-v1',v[0]])];
-  const st=await Promise.all(rows.map(r=>inCache(r[2],r[1])));
+  const rows=[['Lição: '+D.title+' · '+D.human,LURL,'ess-licoes-v1','L','lesson:main'],...VERS.map(v=>['Bíblia '+v[1],VURL(v[0]),'ess-biblia-v1',v[0],'bib:'+v[0]])];
+  const st=await Promise.all(rows.map(r=>saved(r[2],r[1],r[4])));
   $('sbody').innerHTML='<p class="mute">Baixe uma vez com internet; depois a lição, os versículos e seus grifos abrem sem conexão.</p>'+rows.map((r,i)=>`<div class="orow"><div><strong>${r[0]}</strong><small>${st[i]?'✓ salvo neste aparelho':'ainda não salvo'}</small></div><button data-o="${r[3]}">${st[i]?'Atualizar':'Baixar'}</button></div>`).join('')+'<button class="go" data-o="all">Salvar tudo para offline</button>';
 }
 async function doOff(k,btn){
   btn.disabled=true;btn.textContent='Baixando…';
   try{
-    if(k=='L'||k=='all'){if(!navigator.onLine)throw 0;if(!(await autoSync(true))){adopt(await loadLesson());draw()}Object.values(CAP[D.id]||{}).forEach(c=>c.img&&fetch(c.img,{mode:'no-cors'}).catch(()=>{}))}
+    if(k=='L'||k=='all'){if(!navigator.onLine)throw 0;if(!(await autoSync(true))){await refreshLesson(true);adopt(await loadLesson());draw()}Object.values(CAP[D.id]||{}).forEach(c=>c.img&&fetch(c.img,{mode:'no-cors'}).catch(()=>{}))}
     for(const v of VERS)if(k==v[0]||k=='all')await loadBible(v[0],true);
     showOffline();
   }catch(e){btn.disabled=false;btn.textContent='Tentar de novo';$('sbody').insertAdjacentHTML('afterbegin','<p style="color:#c0392b">Falha no download. Verifique a conexão.</p>')}
@@ -437,7 +473,7 @@ function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTi
 let chk=0,dchk=0;
 async function refreshData(force){
   if(!navigator.onLine||(!force&&Date.now()-dchk<6e5))return false;dchk=Date.now();
-  const g=n=>fetch('data/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>null);
+  const g=n=>fetchT('data/'+n+'.json',8000,{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>null);
   const [c,a,z]=await Promise.all([g('capas'),g('audios'),g('quiz')]),old=JSON.stringify([CAP,AUD,QZ]);
   if(c)CAP=c;if(a)AUD=a;if(z)QZ=z;
   return JSON.stringify([CAP,AUD,QZ])!=old;
@@ -452,8 +488,9 @@ async function autoSync(force){
     if(!force&&D&&D.id==id&&Date.now()-last<2592e5)return false;
     const nd=await fetchQuarter(id,f[1]);
     try{const c=await caches.open('ess-licoes-v1');await c.put(SK,new Response(JSON.stringify(nd),{headers:{'Content-Type':'application/json'}}))}catch(e){}
+    idb.set('lesson:sync',nd);
     try{localStorage.setItem('ess:sync:'+id,Date.now())}catch(e){}
-    try{[CAP,AUD,QZ]=await Promise.all(['capas','audios','quiz'].map(n=>fetch('data/'+n+'.json',{cache:'no-cache'}).then(r=>r.json())))}catch(e){}
+    try{[CAP,AUD,QZ]=await Promise.all(['capas','audios','quiz'].map(n=>fetchT('data/'+n+'.json',8000,{cache:'no-cache'}).then(r=>r.json())))}catch(e){}
     const nq=D.id!=id,ch=nq||JSON.stringify(nd.weeks)!=JSON.stringify(D.weeks);
     adopt(nd);
     if(nq)VIEW='home';if(nq||!(document.activeElement&&document.activeElement.tagName=='TEXTAREA'||document.activeElement.tagName=='INPUT'))draw();
@@ -467,7 +504,16 @@ function hero(wi,di){
   const w=D.weeks[wi],c=byN(CAP,w.n)||{},im=c.img||GH+D.id+'/cover.png',per=c.periodo||addDay(w.start,0,1)+' a '+addDay(w.end,0,1);
   return`<div class="hero${di?' slim':''}"><img src="${esc(im)}" alt="Capa da lição ${w.n}" referrerpolicy="no-referrer" onerror="this.style.display='none'">${di?'':`<div class="hc"><small>Lição ${w.n} · ${esc(D.title)}</small><b>${esc(w.title)}</b><span>${per}${c.link?` · <a href="${esc(c.link)}" target="_blank" rel="noopener">ver no CPB mais ↗</a>`:''}</span></div>`}</div>`;
 }
-addEventListener('online',()=>{chk=0;autoSync()});
+/* Baixa sozinho (em segundo plano) as 3 versões da Bíblia que ainda não estão salvas, para nunca depender de internet na hora de ler. */
+let warming=false;
+async function warmOffline(){
+  if(warming||!navigator.onLine||(navigator.connection&&navigator.connection.saveData))return;warming=true;
+  try{for(const id of [S.ver,...VERS.map(v=>v[0]).filter(x=>x!=S.ver)]){
+    const ok=(await inCache('ess-biblia-v1',VURL(id)))&&(await idb.has('bib:'+id));
+    if(!ok&&!vd[id])try{await loadBible(id)}catch(e){if(!navigator.onLine)break}
+  }}finally{warming=false}
+}
+addEventListener('online',()=>{chk=0;autoSync();refreshLesson();setTimeout(warmOffline,3000)});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){autoSync();pushSync()}});
 
 /* ===== página inicial: capa do trimestre + lista de lições ===== */
@@ -692,8 +738,8 @@ $('pn').onclick=pushToggle;pushBtn();
 if(pushOk())navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.hoje&&D){VIEW='day';today()}});
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 apply();
-const jf=u=>fetch(u,{cache:'no-cache'}).then(r=>r.json()).catch(()=>({}));
-Promise.all([loadLesson(),jf('data/capas.json'),jf('data/audios.json'),jf('data/quiz.json')]).then(([d,c,a,z])=>{CAP=c;AUD=a;QZ=z;adopt(d);VIEW='home';draw();autoSync();retrySends();pushSync();if(/[?&]hoje=1/.test(location.search)){today();history.replaceState(null,'',location.pathname)}}).catch(()=>{$('app').innerHTML='<p class="intro">Não foi possível carregar a lição. Conecte-se à internet uma vez para salvá-la neste aparelho.</p>'});
+const jf=u=>fetchT(u,8000,{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>caches.match(u).then(h=>h?h.json():{}).catch(()=>({})));
+Promise.all([loadLesson(),jf('data/capas.json'),jf('data/audios.json'),jf('data/quiz.json')]).then(([d,c,a,z])=>{CAP=c;AUD=a;QZ=z;adopt(d);VIEW='home';draw();refreshLesson();autoSync();retrySends();pushSync();setTimeout(warmOffline,4000);if(/[?&]hoje=1/.test(location.search)){today();history.replaceState(null,'',location.pathname)}}).catch(()=>{$('app').innerHTML='<p class="intro">Não foi possível carregar a lição. Conecte-se à internet uma vez para salvá-la neste aparelho.</p>'});
 </script>
 </body>
 </html>
